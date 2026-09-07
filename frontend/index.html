@@ -2,60 +2,116 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
 
   <title>ProgressBridge — Infrastructure Monitoring Portal</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+
   <link
     href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap"
     rel="stylesheet"
   >
 
-  <link rel="stylesheet" href="css/style.css">
+  <link
+    rel="stylesheet"
+    href="css/style.css"
+  >
 </head>
 
 <body>
 
   <!-- =====================================================
-       SIGN IN SCREEN
+       LOGIN SCREEN
        ===================================================== -->
 
-  <section id="login-screen" class="login-screen">
+  <section
+    id="login-screen"
+    class="login-screen"
+  >
 
-    <div class="login-top-strip">
+    <div
+      class="login-top-strip"
+      aria-hidden="true"
+    >
       <span></span>
       <span></span>
       <span></span>
     </div>
 
+
     <div class="login-card">
 
+      <!-- Brand -->
+
       <div class="login-brand">
-        <div class="login-emblem">PB</div>
+
+        <div class="login-emblem">
+          PB
+        </div>
 
         <div>
-          <h1>ProgressBridge</h1>
-          <p>Infrastructure Monitoring Portal</p>
+
+          <h1>
+            ProgressBridge
+          </h1>
+
+          <p>
+            Infrastructure Monitoring Portal
+          </p>
+
         </div>
+
       </div>
+
 
       <div class="login-divider"></div>
 
+
+      <!-- Login heading -->
+
       <div class="login-heading">
-        <h2>Sign in</h2>
+
+        <h2>
+          Sign in
+        </h2>
+
         <p>
-          Access project progress, work schedules and field updates.
+          Access project progress, work schedules
+          and field updates.
         </p>
+
       </div>
 
-      <form id="login-form" onsubmit="handleLogin(event)">
+
+      <!-- Login form -->
+
+      <form
+        id="login-form"
+        onsubmit="handleLogin(event)"
+      >
 
         <div class="form-group">
-          <label for="login-role">Sign in as</label>
 
-          <select id="login-role" class="form-control">
+          <label for="login-role">
+            Sign in as
+          </label>
+
+          <select
+            id="login-role"
+            class="form-control"
+            required
+          >
 
             <option value="EXECUTIVE_ENGINEER">
               Executive Engineer
@@ -66,7 +122,9 @@
             </option>
 
           </select>
+
         </div>
+
 
         <div class="form-group">
 
@@ -79,10 +137,12 @@
             class="form-control"
             type="text"
             placeholder="Enter employee ID"
+            autocomplete="username"
             required
           >
 
         </div>
+
 
         <div class="form-group">
 
@@ -95,12 +155,19 @@
             class="form-control"
             type="password"
             placeholder="Enter password"
+            autocomplete="current-password"
             required
           >
 
         </div>
 
-        <div id="login-error" class="login-error"></div>
+
+        <div
+          id="login-error"
+          class="login-error"
+          role="alert"
+        ></div>
+
 
         <button
           type="submit"
@@ -111,7 +178,9 @@
 
       </form>
 
-      <!-- Prototype information -->
+
+      <!-- SIH demo access -->
+
       <div class="demo-login">
 
         <div class="demo-login-title">
@@ -119,56 +188,72 @@
         </div>
 
         <p>
-          This is a prototype login. Real JWT authentication will be
-          connected through the backend.
+          Use a demo account to explore ProgressBridge
+          with different user roles.
         </p>
+
 
         <div class="demo-accounts">
 
           <button
             type="button"
+            class="demo-account-btn"
             onclick="useDemoAccount('EXECUTIVE_ENGINEER')"
           >
-            Executive Engineer Demo
+
+            <span class="demo-account-name">
+              Executive Engineer
+            </span>
+
+            <span class="demo-account-id">
+              PB-EE-104
+            </span>
+
           </button>
+
 
           <button
             type="button"
+            class="demo-account-btn"
             onclick="useDemoAccount('FIELD_ENGINEER')"
           >
-            Field Engineer Demo
+
+            <span class="demo-account-name">
+              Field Engineer
+            </span>
+
+            <span class="demo-account-id">
+              PB-FE-218
+            </span>
+
           </button>
 
         </div>
 
-        <div class="demo-login-box">
-  <p class="demo-title">Demo Accounts</p>
 
-  <button
-    type="button"
-    class="demo-account-btn"
-    onclick="useDemoAccount('EXECUTIVE_ENGINEER')"
-  >
-    Executive Engineer
-    <span>PB-EE-104</span>
-  </button>
+        <div class="demo-password">
 
-  <button
-    type="button"
-    class="demo-account-btn"
-    onclick="useDemoAccount('FIELD_ENGINEER')"
-  >
-    Field Engineer
-    <span>PB-FE-218</span>
-  </button>
+          Demo password:
 
-  <p class="demo-password">
-    Demo password: <strong>demo</strong>
-  </p>
-</div>
+          <strong>
+            demo
+          </strong>
+
+        </div>
+
+
+        <div class="demo-note">
+
+          Prototype login only.
+          Real JWT authentication and RBAC will be
+          connected through the backend.
+
+        </div>
+
       </div>
 
     </div>
+
 
     <div class="login-footer">
       ProgressBridge • SIH 2026 Prototype
@@ -178,17 +263,25 @@
 
 
   <!-- =====================================================
-       APPLICATION
-       Hidden until the user signs in
+       APPLICATION SHELL
        ===================================================== -->
 
-  <div id="app-shell" class="app-shell hidden">
+  <div
+    id="app-shell"
+    class="app-shell hidden"
+  >
 
     <!-- Indian tricolor strip -->
-    <div class="tricolor-strip" aria-hidden="true">
+
+    <div
+      class="tricolor-strip"
+      aria-hidden="true"
+    >
+
       <div class="saffron"></div>
       <div class="white"></div>
       <div class="green"></div>
+
     </div>
 
 
@@ -196,7 +289,12 @@
          SIDEBAR
          ================================================= -->
 
-    <aside class="sidebar">
+    <aside
+      class="sidebar"
+      id="sidebar"
+    >
+
+      <!-- Sidebar header -->
 
       <div
         class="sidebar-header"
@@ -209,7 +307,9 @@
 
         <div class="sidebar-brand">
 
-          <h2>ProgressBridge</h2>
+          <h2>
+            ProgressBridge
+          </h2>
 
           <p>
             Infrastructure Monitoring
@@ -220,39 +320,64 @@
       </div>
 
 
-      <div class="sidebar-role" id="sidebar-role">
+      <!-- Current role -->
+
+      <div
+        class="sidebar-role"
+        id="sidebar-role"
+      >
         Executive Engineer
       </div>
 
 
-      <nav>
+      <!-- Navigation -->
+
+      <nav aria-label="Main navigation">
 
         <ul class="sidebar-nav">
 
-          <!-- Common -->
+          <!-- Dashboard -->
+
           <li>
+
             <a
               href="#/dashboard"
               id="nav-dashboard"
-              onclick="navigateTo('/dashboard'); return false;"
+              class="nav-link"
+              onclick="
+                navigateTo('/dashboard');
+                return false;
+              "
             >
-              <span>Dashboard</span>
+              <span>
+                Dashboard
+              </span>
             </a>
+
           </li>
 
 
           <!-- Executive Engineer -->
+
           <li
             class="role-executive"
             id="nav-item-projects"
           >
+
             <a
               href="#/projects"
               id="nav-projects"
-              onclick="navigateTo('/projects'); return false;"
+              class="nav-link"
+              onclick="
+                navigateTo('/projects');
+                return false;
+              "
             >
-              <span>Projects</span>
+              <span>
+                Projects
+              </span>
             </a>
+
           </li>
 
 
@@ -260,43 +385,69 @@
             class="role-executive"
             id="nav-item-schedule"
           >
+
             <a
               href="#/schedule"
               id="nav-schedule"
-              onclick="navigateTo('/schedule'); return false;"
+              class="nav-link"
+              onclick="
+                navigateTo('/schedule');
+                return false;
+              "
             >
-              <span>Schedule of Works</span>
+              <span>
+                Schedule of Works
+              </span>
             </a>
+
           </li>
 
 
           <!-- Field Engineer -->
+
           <li
             class="role-field"
             id="nav-item-reports"
           >
+
             <a
               href="#/reports"
               id="nav-reports"
-              onclick="navigateTo('/reports'); return false;"
+              class="nav-link"
+              onclick="
+                navigateTo('/reports');
+                return false;
+              "
             >
-              <span>Submit Field Report</span>
+              <span>
+                Submit Field Report
+              </span>
             </a>
+
           </li>
 
 
           <!-- Executive Engineer -->
+
           <li
             class="role-executive"
             id="nav-item-verification"
           >
+
             <a
               href="#/verification"
               id="nav-verification"
-              onclick="navigateTo('/verification'); return false;"
+              class="nav-link"
+              onclick="
+                navigateTo('/verification');
+                return false;
+              "
             >
-              <span>Verification Desk</span>
+              <span>
+                Verification Desk
+              </span>
             </a>
+
           </li>
 
 
@@ -304,29 +455,43 @@
             class="role-executive"
             id="nav-item-audit"
           >
+
             <a
               href="#/audit"
               id="nav-audit"
-              onclick="navigateTo('/audit'); return false;"
+              class="nav-link"
+              onclick="
+                navigateTo('/audit');
+                return false;
+              "
             >
-              <span>Audit Log</span>
+              <span>
+                Audit Log
+              </span>
             </a>
+
           </li>
 
 
-          <!-- AI is useful for demonstration,
-               but is not a separate user workflow -->
           <li
             class="role-executive"
             id="nav-item-ai"
           >
+
             <a
               href="#/ai-engine"
               id="nav-ai-engine"
-              onclick="navigateTo('/ai-engine'); return false;"
+              class="nav-link"
+              onclick="
+                navigateTo('/ai-engine');
+                return false;
+              "
             >
-              <span>AI Matching</span>
+              <span>
+                AI Matching
+              </span>
             </a>
+
           </li>
 
         </ul>
@@ -334,9 +499,13 @@
       </nav>
 
 
+      <!-- Sidebar footer -->
+
       <div class="sidebar-footer">
 
-        <strong>SIH 2026 Prototype</strong>
+        <strong>
+          SIH 2026 Prototype
+        </strong>
 
         <span>
           Government Infrastructure Monitoring
@@ -348,10 +517,13 @@
 
 
     <!-- =================================================
-         MAIN AREA
+         MAIN WRAPPER
          ================================================= -->
 
     <div class="main-wrapper">
+
+
+      <!-- Top bar -->
 
       <header class="top-utility-bar">
 
@@ -361,7 +533,7 @@
             id="breadcrumb-text"
             class="breadcrumb"
           >
-            DASHBOARD
+            Dashboard
           </div>
 
           <div
@@ -373,6 +545,8 @@
 
         </div>
 
+
+        <!-- User information -->
 
         <div class="user-area">
 
@@ -396,6 +570,7 @@
 
 
           <button
+            type="button"
             class="gov-btn gov-btn-secondary gov-btn-sm"
             onclick="logoutOfficer()"
           >
@@ -407,18 +582,23 @@
       </header>
 
 
+      <!-- Main application viewport -->
+
       <main
         class="viewport"
         id="viewport"
       ></main>
 
 
-      <!-- Existing verification print area -->
+      <!-- Printable sanction order -->
+
       <div
         id="printable-sanction-order"
-        style="display:none;"
+        style="display: none;"
       ></div>
 
+
+      <!-- Footer -->
 
       <footer class="gov-footer">
 
@@ -438,18 +618,13 @@
 
 
   <!-- =====================================================
-       EXISTING PROJECT MODULES
-       DO NOT REMOVE THESE
+       JAVASCRIPT MODULES
        ===================================================== -->
 
   <script src="js/app.js"></script>
-
   <script src="js/dashboard.js"></script>
-
   <script src="js/schedule.js"></script>
-
   <script src="js/reports.js"></script>
-
   <script src="js/verification.js"></script>
 
 </body>
