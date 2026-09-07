@@ -27,7 +27,7 @@ class Activity(Base):
 
 
 class ProgressReport(Base):
-    __tablename__ = "progress_reports"
+    __tablename__ = "reports"
 
     id = Column(Integer, primary_key=True)
     created_at = Column(DateTime)
