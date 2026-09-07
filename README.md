@@ -387,3 +387,46 @@ As development continues, the focus will be on making the system useful, underst
 This project is currently being developed for academic and educational purposes.
 
 A formal open-source license may be added later if the project is released for public use.
+---
+
+## Deployment Guide
+
+### Frontend Deployment — GitHub Pages
+
+1. Push the `frontend` folder to the GitHub repository.
+2. Open the repository's **Settings**.
+3. Go to **Pages**.
+4. Under **Build and deployment**, select **Deploy from a branch**.
+5. Select the `main` branch.
+6. Select the appropriate frontend folder/source.
+7. Save the settings.
+8. GitHub Pages will provide the deployed frontend URL.
+
+### Backend Deployment — Render
+
+1. Create a Render Web Service from the ProgressBridge GitHub repository.
+2. Select the `main` branch.
+3. Set the backend root directory to `backend`.
+4. Configure the Python environment.
+5. Add the required environment variables.
+6. Deploy the FastAPI backend.
+7. Use the generated Render URL as the backend API URL.
+
+### Environment Variables
+
+The backend should use environment variables for configuration, including:
+
+- `DATABASE_URL`
+- `SUPABASE_URL`
+- `SUPABASE_KEY`
+- `JWT_SECRET`
+
+Sensitive keys and passwords must not be committed to GitHub.
+
+### CI/CD
+
+GitHub Actions is configured through:
+
+`.github/workflows/deploy.yml`
+
+The workflow checks Python code using Ruff whenever changes are pushed to the `main` branch or submitted through a pull request.
