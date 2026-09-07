@@ -140,3 +140,62 @@ ON verifications(report_id);
 
 CREATE INDEX IF NOT EXISTS idx_audit_report_id
 ON audit_ledger(report_id);
+-- ============================================
+-- SEED DATA
+-- 6 infrastructure projects + 36 activities
+-- ============================================
+
+INSERT INTO projects
+(project_name, latitude, longitude, planned_progress, actual_progress)
+VALUES
+('Mumbai Water Pipeline', 19.0760, 72.8777, 45, 40),
+('Delhi-NCR Expressway', 28.6139, 77.2090, 70, 66),
+('Bengaluru Metro Corridor', 12.9716, 77.5946, 55, 50),
+('Hyderabad Riverfront Development', 17.3850, 78.4867, 40, 35),
+('Chennai Coastal Drainage Upgrade', 13.0827, 80.2707, 60, 57);
+
+-- Activities for the seeded projects
+INSERT INTO activities
+(project_id, activity_name, discipline, status)
+VALUES
+(2, 'Tunnel Excavation', 'Civil', 'In Progress'),
+(2, 'Station Foundation Work', 'Civil', 'Completed'),
+(2, 'Track Installation', 'Civil', 'Not Started'),
+(2, 'Electrical Cabling', 'Electrical', 'In Progress'),
+(2, 'Ventilation System Installation', 'Mechanical', 'Not Started'),
+(2, 'Water Drainage Installation', 'Water Supply', 'In Progress'),
+
+(3, 'Pipeline Trenching', 'Civil', 'Completed'),
+(3, 'Main Pipeline Installation', 'Water Supply', 'In Progress'),
+(3, 'Pipeline Joint Testing', 'Water Supply', 'Not Started'),
+(3, 'Pump Installation', 'Mechanical', 'Not Started'),
+(3, 'Electrical Control Panel Installation', 'Electrical', 'In Progress'),
+(3, 'Road Restoration', 'Civil', 'Not Started'),
+
+(4, 'Earthwork and Excavation', 'Civil', 'Completed'),
+(4, 'Highway Pavement Construction', 'Civil', 'In Progress'),
+(4, 'Drainage System Construction', 'Water Supply', 'In Progress'),
+(4, 'Street Lighting Installation', 'Electrical', 'Not Started'),
+(4, 'Traffic Signal Installation', 'Electrical', 'Not Started'),
+(4, 'Roadside Mechanical Equipment', 'Mechanical', 'Not Started'),
+
+(5, 'Viaduct Construction', 'Civil', 'In Progress'),
+(5, 'Station Structural Work', 'Civil', 'In Progress'),
+(5, 'Rail Track Installation', 'Civil', 'Not Started'),
+(5, 'Power Supply Installation', 'Electrical', 'In Progress'),
+(5, 'Escalator Installation', 'Mechanical', 'Not Started'),
+(5, 'Water Supply and Drainage', 'Water Supply', 'Not Started'),
+
+(6, 'Riverbank Civil Works', 'Civil', 'In Progress'),
+(6, 'Storm Water Drainage', 'Water Supply', 'In Progress'),
+(6, 'Electrical Lighting Installation', 'Electrical', 'Not Started'),
+(6, 'Water Pump Installation', 'Mechanical', 'Not Started'),
+(6, 'Walkway Construction', 'Civil', 'Not Started'),
+(6, 'Water Pipeline Connection', 'Water Supply', 'Not Started'),
+
+(7, 'Drain Excavation', 'Civil', 'Completed'),
+(7, 'Drainage Pipeline Installation', 'Water Supply', 'In Progress'),
+(7, 'Pump Station Construction', 'Mechanical', 'In Progress'),
+(7, 'Electrical Pump Connections', 'Electrical', 'Not Started'),
+(7, 'Flood Control Structure', 'Civil', 'Not Started'),
+(7, 'Water Flow Testing', 'Water Supply', 'Not Started');
