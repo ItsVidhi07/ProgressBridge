@@ -1,0 +1,27 @@
+/* =========================================================
+   ADD-ON: fills the 3 status-badge variants that
+   getStatusBadge() in app.js already maps to
+   ("Approved" / "Rejected" / "Pending Review") but that
+   were not yet defined here. Same pattern as the existing
+   .status-completed / .status-delayed / .status-at-risk /
+   .status-upcoming rules just above this block — paste
+   this directly after them (around line 1523).
+   ========================================================= */
+
+.status-approved {
+  color: var(--success);
+  background: var(--success-bg);
+  border-color: #c5e5d0;
+}
+
+.status-rejected {
+  color: var(--danger);
+  background: var(--danger-bg);
+  border-color: #f0c5c1;
+}
+
+.status-pending {
+  color: #59687a;
+  background: #f2f4f7;
+  border-color: #dce1e7;
+}
