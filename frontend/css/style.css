@@ -655,27 +655,6 @@ textarea.form-control {
 
 /* Demo account cards */
 
-.demo-login-box {
-  margin-top: 15px;
-
-  padding: 15px;
-
-  background: #f7f9fc;
-
-  border: 1px solid var(--border-light);
-
-  border-radius: var(--radius-md);
-}
-
-.demo-title {
-  color: var(--text-secondary) !important;
-
-  font-size: 11px !important;
-  font-weight: 700 !important;
-
-  margin-bottom: 10px !important;
-}
-
 .demo-account-btn {
   width: 100%;
 
