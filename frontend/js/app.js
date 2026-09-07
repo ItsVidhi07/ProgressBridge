@@ -1,402 +1,18 @@
 /* =========================================================
    PROGRESSBRIDGE
-   MEMBER 1 — APP SHELL, ROUTING & MOCK DATA
+   SIH 2026
+   APPLICATION CONTROLLER
    ========================================================= */
 
-const API_BASE_URL = "http://127.0.0.1:8000/api/v1";
-
-
-/* =========================================================
-   APPLICATION STORE
-========================================================= */
-
-const store = {
-
-  currentUser: null,
-
-  selectedProjectId: "INF-MH-2026-014",
-
-  projects: [
-
-    {
-      id: "INF-MH-2026-014",
-      code: "INF-MH-2026-014",
-      name: "Mumbai Water Supply Improvement",
-      department: "Public Infrastructure Division",
-      location: "Mumbai, Maharashtra",
-
-      status: "Under Work",
-
-      plannedProgress: 72,
-      actualProgress: 68,
-
-      totalActivities: 6,
-      completedActivities: 1,
-      delayedActivities: 2,
-      atRiskActivities: 1,
-
-      siteGeoCenter: {
-        lat: 19.0760,
-        lng: 72.8777,
-        radiusMeters: 2500
-      }
-    },
-
-    {
-      id: "INF-DL-2026-022",
-      code: "INF-DL-2026-022",
-      name: "Delhi-NCR Expressway Improvement",
-      department: "National Highways Division",
-      location: "Delhi-NCR",
-
-      status: "Under Work",
-
-      plannedProgress: 85,
-      actualProgress: 81,
-
-      totalActivities: 6,
-      completedActivities: 4,
-      delayedActivities: 1,
-      atRiskActivities: 0,
-
-      siteGeoCenter: {
-        lat: 28.5921,
-        lng: 77.0460,
-        radiusMeters: 3000
-      }
-    },
-
-    {
-      id: "INF-KA-2026-055",
-      code: "INF-KA-2026-055",
-      name: "Bengaluru Metro Airport Link",
-      department: "Urban Transport Division",
-      location: "Bengaluru, Karnataka",
-
-      status: "Under Work",
-
-      plannedProgress: 55,
-      actualProgress: 49,
-
-      totalActivities: 6,
-      completedActivities: 2,
-      delayedActivities: 2,
-      atRiskActivities: 1,
-
-      siteGeoCenter: {
-        lat: 12.9716,
-        lng: 77.5946,
-        radiusMeters: 4000
-      }
-    }
-
-  ],
-
-
-  /* =======================================================
-     PROJECT ACTIVITIES
-  ======================================================= */
-
-  activities: [
-
-    {
-      id: "A-001",
-      projectId: "INF-MH-2026-014",
-
-      code: "A-001",
-
-      description: "Check and mark the pipeline route",
-      discipline: "Survey",
-
-      start: "01 Aug 2026",
-      finish: "15 Aug 2026",
-
-      progress: 100,
-      status: "Completed",
-
-      notes:
-        "The pipeline route was checked and marked across the planned area."
-    },
-
-    {
-      id: "A-002",
-      projectId: "INF-MH-2026-014",
-
-      code: "A-002",
-
-      description: "Dig the pipeline trench in Zone 1",
-      discipline: "Civil",
-
-      start: "10 Aug 2026",
-      finish: "22 Aug 2026",
-
-      progress: 85,
-      status: "On Track",
-
-      notes:
-        "Most of the trench has been completed and work is moving as planned."
-    },
-
-    {
-      id: "A-003",
-      projectId: "INF-MH-2026-014",
-
-      code: "A-003",
-
-      description: "Lay water pipes in Zone 1",
-      discipline: "Water Supply",
-
-      start: "18 Aug 2026",
-      finish: "28 Aug 2026",
-
-      progress: 72,
-      status: "On Track",
-
-      notes:
-        "Around 180 metres of water pipe has been placed in Zone 1."
-    },
-
-    {
-      id: "A-004",
-      projectId: "INF-MH-2026-014",
-
-      code: "A-004",
-
-      description: "Repair the road after pipe work",
-      discipline: "Civil",
-
-      start: "24 Aug 2026",
-      finish: "30 Aug 2026",
-
-      progress: 45,
-      status: "Delayed",
-
-      notes:
-        "Heavy rain has slowed down road repair work."
-    },
-
-    {
-      id: "A-005",
-      projectId: "INF-MH-2026-014",
-
-      code: "A-005",
-
-      description: "Build the valve chamber",
-      discipline: "Civil",
-
-      start: "28 Aug 2026",
-      finish: "02 Sep 2026",
-
-      progress: 30,
-      status: "At Risk",
-
-      notes:
-        "Water entering the work area is slowing construction."
-    },
-
-    {
-      id: "A-006",
-      projectId: "INF-MH-2026-014",
-
-      code: "A-006",
-
-      description: "Test the pipeline and prepare it for use",
-      discipline: "Mechanical",
-
-      start: "03 Sep 2026",
-      finish: "07 Sep 2026",
-
-      progress: 0,
-      status: "Upcoming",
-
-      notes:
-        "Testing will begin after the valve chamber work is completed."
-    },
-
-
-    /* =====================================================
-       DELHI
-    ===================================================== */
-
-    {
-      id: "A-007",
-      projectId: "INF-DL-2026-022",
-
-      code: "A-007",
-
-      description: "Prepare the road work area",
-      discipline: "Civil",
-
-      start: "01 Jul 2026",
-      finish: "10 Jul 2026",
-
-      progress: 100,
-      status: "Completed",
-
-      notes:
-        "The work area has been prepared."
-    },
-
-    {
-      id: "A-008",
-      projectId: "INF-DL-2026-022",
-
-      code: "A-008",
-
-      description: "Build the main road section",
-      discipline: "Civil",
-
-      start: "11 Jul 2026",
-      finish: "20 Aug 2026",
-
-      progress: 92,
-      status: "On Track",
-
-      notes:
-        "The main road section is nearing completion."
-    },
-
-    {
-      id: "A-009",
-      projectId: "INF-DL-2026-022",
-
-      code: "A-009",
-
-      description: "Install road lighting",
-      discipline: "Electrical",
-
-      start: "15 Aug 2026",
-      finish: "30 Aug 2026",
-
-      progress: 78,
-      status: "On Track",
-
-      notes:
-        "Most lighting units have been installed."
-    },
-
-    {
-      id: "A-010",
-      projectId: "INF-DL-2026-022",
-
-      code: "A-010",
-
-      description: "Build drainage channels",
-      discipline: "Civil",
-
-      start: "20 Aug 2026",
-      finish: "10 Sep 2026",
-
-      progress: 55,
-      status: "Delayed",
-
-      notes:
-        "Drainage work is slower than planned."
-    },
-
-
-    /* =====================================================
-       BENGALURU
-    ===================================================== */
-
-    {
-      id: "A-011",
-      projectId: "INF-KA-2026-055",
-
-      code: "A-011",
-
-      description: "Prepare the metro work area",
-      discipline: "Civil",
-
-      start: "01 Jul 2026",
-      finish: "15 Jul 2026",
-
-      progress: 100,
-      status: "Completed",
-
-      notes:
-        "The work area is ready for construction."
-    },
-
-    {
-      id: "A-012",
-      projectId: "INF-KA-2026-055",
-
-      code: "A-012",
-
-      description: "Build the metro support structure",
-      discipline: "Civil",
-
-      start: "16 Jul 2026",
-      finish: "30 Aug 2026",
-
-      progress: 70,
-      status: "On Track",
-
-      notes:
-        "Support structure construction is progressing."
-    },
-
-    {
-      id: "A-013",
-      projectId: "INF-KA-2026-055",
-
-      code: "A-013",
-
-      description: "Install electrical equipment",
-      discipline: "Electrical",
-
-      start: "20 Aug 2026",
-      finish: "15 Sep 2026",
-
-      progress: 38,
-      status: "Delayed",
-
-      notes:
-        "Equipment delivery has affected the work."
-    },
-
-    {
-      id: "A-014",
-      projectId: "INF-KA-2026-055",
-
-      code: "A-014",
-
-      description: "Prepare airport-side station work",
-      discipline: "Civil",
-
-      start: "25 Aug 2026",
-      finish: "20 Sep 2026",
-
-      progress: 20,
-      status: "At Risk",
-
-      notes:
-        "The work area needs additional preparation."
-    }
-
-  ],
-
-
-  /* =======================================================
-     AUDIT TRAIL
-  ======================================================= */
-
-  auditTrail: []
-
-};
+const API_BASE_URL =
+  "http://127.0.0.1:8000/api/v1";
 
 
 /* =========================================================
    DEMO USERS
-   ---------------------------------------------------------
-   These are FRONTEND DEMO accounts.
+   ========================================================= */
 
-   Real JWT authentication and backend RBAC will later
-   be connected by Member 5.
-========================================================= */
-
-const demoUsers = {
+const DEMO_USERS = {
 
   EXECUTIVE_ENGINEER: {
     name: "Rajesh Kumar",
@@ -416,8 +32,246 @@ const demoUsers = {
 
 
 /* =========================================================
-   AUTHENTICATION
-========================================================= */
+   APPLICATION STORE
+   ========================================================= */
+
+const store = {
+
+  currentUser: null,
+
+  selectedProjectId: "INF-MH-2026-014",
+
+  projects: [
+
+    {
+      id: "INF-MH-2026-014",
+      name: "Mumbai Water Supply Improvement",
+      location: "Mumbai, Maharashtra",
+      planned: 72,
+      actual: 68,
+      status: "On Track",
+      activities: 6
+    },
+
+    {
+      id: "INF-DL-2026-022",
+      name: "Delhi-NCR Expressway Improvement",
+      location: "Delhi-NCR",
+      planned: 85,
+      actual: 81,
+      status: "On Track",
+      activities: 5
+    },
+
+    {
+      id: "INF-KA-2026-055",
+      name: "Bengaluru Metro Airport Link",
+      location: "Bengaluru, Karnataka",
+      planned: 55,
+      actual: 49,
+      status: "Delayed",
+      activities: 4
+    }
+
+  ],
+
+
+  activities: [
+
+    {
+      id: "A-001",
+      projectId: "INF-MH-2026-014",
+      description: "Site preparation and survey",
+      discipline: "Civil",
+      start: "2026-08-01",
+      end: "2026-08-07",
+      progress: 100,
+      status: "Completed",
+      notes: "Survey completed."
+    },
+
+    {
+      id: "A-002",
+      projectId: "INF-MH-2026-014",
+      description: "Pipeline trench excavation",
+      discipline: "Civil",
+      start: "2026-08-08",
+      end: "2026-08-20",
+      progress: 82,
+      status: "On Track",
+      notes: "Excavation progressing as scheduled."
+    },
+
+    {
+      id: "A-003",
+      projectId: "INF-MH-2026-014",
+      description: "Main pipeline installation",
+      discipline: "Water Supply",
+      start: "2026-08-18",
+      end: "2026-09-05",
+      progress: 68,
+      status: "On Track",
+      notes: "Installation underway."
+    },
+
+    {
+      id: "A-004",
+      projectId: "INF-MH-2026-014",
+      description: "Valve chamber construction",
+      discipline: "Civil",
+      start: "2026-08-25",
+      end: "2026-09-12",
+      progress: 52,
+      status: "On Track",
+      notes: "Construction in progress."
+    },
+
+    {
+      id: "A-005",
+      projectId: "INF-MH-2026-014",
+      description: "Pressure testing",
+      discipline: "Water Supply",
+      start: "2026-09-10",
+      end: "2026-09-18",
+      progress: 20,
+      status: "Upcoming",
+      notes: "Awaiting installation completion."
+    },
+
+    {
+      id: "A-006",
+      projectId: "INF-MH-2026-014",
+      description: "Final restoration",
+      discipline: "Civil",
+      start: "2026-09-19",
+      end: "2026-09-30",
+      progress: 0,
+      status: "Upcoming",
+      notes: "Scheduled after testing."
+    },
+
+    {
+      id: "A-007",
+      projectId: "INF-DL-2026-022",
+      description: "Road survey",
+      discipline: "Civil",
+      start: "2026-07-01",
+      end: "2026-07-10",
+      progress: 100,
+      status: "Completed",
+      notes: "Survey completed."
+    },
+
+    {
+      id: "A-008",
+      projectId: "INF-DL-2026-022",
+      description: "Drainage improvement",
+      discipline: "Civil",
+      start: "2026-07-12",
+      end: "2026-08-02",
+      progress: 92,
+      status: "On Track",
+      notes: "Work nearing completion."
+    },
+
+    {
+      id: "A-009",
+      projectId: "INF-DL-2026-022",
+      description: "Road strengthening",
+      discipline: "Road Works",
+      start: "2026-08-01",
+      end: "2026-09-15",
+      progress: 81,
+      status: "On Track",
+      notes: "Strengthening works underway."
+    },
+
+    {
+      id: "A-010",
+      projectId: "INF-DL-2026-022",
+      description: "Safety barrier installation",
+      discipline: "Road Safety",
+      start: "2026-08-20",
+      end: "2026-09-20",
+      progress: 62,
+      status: "On Track",
+      notes: "Installation progressing."
+    },
+
+    {
+      id: "A-011",
+      projectId: "INF-DL-2026-022",
+      description: "Final inspection",
+      discipline: "Inspection",
+      start: "2026-09-21",
+      end: "2026-09-28",
+      progress: 0,
+      status: "Upcoming",
+      notes: "Planned after construction."
+    },
+
+    {
+      id: "A-012",
+      projectId: "INF-KA-2026-055",
+      description: "Station site preparation",
+      discipline: "Civil",
+      start: "2026-06-01",
+      end: "2026-06-20",
+      progress: 100,
+      status: "Completed",
+      notes: "Site preparation completed."
+    },
+
+    {
+      id: "A-013",
+      projectId: "INF-KA-2026-055",
+      description: "Foundation works",
+      discipline: "Structural",
+      start: "2026-06-21",
+      end: "2026-08-05",
+      progress: 72,
+      status: "Delayed",
+      notes: "Material delivery caused delay."
+    },
+
+    {
+      id: "A-014",
+      projectId: "INF-KA-2026-055",
+      description: "Structural erection",
+      discipline: "Structural",
+      start: "2026-08-01",
+      end: "2026-10-01",
+      progress: 49,
+      status: "Delayed",
+      notes: "Progress below planned schedule."
+    }
+
+  ],
+
+
+  auditTrail: []
+
+};
+
+
+/* =========================================================
+   ROLE DESCRIPTIONS
+   ========================================================= */
+
+const ROLE_DESCRIPTIONS = {
+
+  EXECUTIVE_ENGINEER:
+    "Project monitoring, verification and approval workspace",
+
+  FIELD_ENGINEER:
+    "Field reporting and infrastructure progress workspace"
+
+};
+
+
+/* =========================================================
+   LOGIN
+   ========================================================= */
 
 function handleLogin(event) {
 
@@ -436,70 +290,56 @@ function handleLogin(event) {
     document.getElementById("login-error");
 
 
+  if (
+    !roleElement ||
+    !employeeElement ||
+    !passwordElement
+  ) {
+    return;
+  }
+
+
   const role =
-    roleElement
-      ? roleElement.value
-      : "";
+    roleElement.value;
 
   const employeeId =
-    employeeElement
-      ? employeeElement.value.trim()
-      : "";
+    employeeElement.value
+      .trim()
+      .toUpperCase();
 
   const password =
-    passwordElement
-      ? passwordElement.value.trim()
-      : "";
+    passwordElement.value;
 
 
-  if (!role || !employeeId || !password) {
+  const demoUser =
+    DEMO_USERS[role];
 
-    if (errorElement) {
 
-      errorElement.textContent =
-        "Please enter your role, employee ID and password.";
+  if (!demoUser) {
 
-      errorElement.classList.remove("hidden");
-    }
+    showLoginError(
+      "Invalid role selected."
+    );
 
     return;
   }
 
 
-  const demoUser =
-    Object.values(demoUsers)
-      .find(user =>
-        user.role === role &&
-        user.empId.toLowerCase() === employeeId.toLowerCase()
-      );
+  if (
+    employeeId !== demoUser.empId ||
+    password !== "demo"
+  ) {
 
-
-  /*
-     Demo login accepts password "demo".
-
-     Later:
-     Member 5 will replace this with real JWT login.
-  */
-
-  if (!demoUser || password !== "demo") {
-
-    if (errorElement) {
-
-      errorElement.textContent =
-        "Invalid demo credentials. Use the demo account buttons below.";
-
-      errorElement.classList.remove("hidden");
-    }
+    showLoginError(
+      "Invalid Employee ID or password."
+    );
 
     return;
   }
 
 
   store.currentUser = {
-    name: demoUser.name,
-    designation: demoUser.designation,
-    empId: demoUser.empId,
-    role: demoUser.role
+    ...demoUser
   };
 
 
@@ -510,24 +350,27 @@ function handleLogin(event) {
 
 
   if (errorElement) {
-    errorElement.classList.add("hidden");
+    errorElement.textContent = "";
   }
 
 
   showApplication();
 
+
   navigateTo("/dashboard");
+
 }
 
 
 /* =========================================================
-   DEMO ACCOUNT HELPER
-========================================================= */
+   DEMO ACCOUNT LOGIN
+   ========================================================= */
 
 function useDemoAccount(role) {
 
   const user =
-    demoUsers[role];
+    DEMO_USERS[role];
+
 
   if (!user) {
     return;
@@ -543,44 +386,54 @@ function useDemoAccount(role) {
   const passwordElement =
     document.getElementById("login-password");
 
-  const errorElement =
-    document.getElementById("login-error");
-
 
   if (roleElement) {
-    roleElement.value = user.role;
+    roleElement.value = role;
   }
 
   if (employeeElement) {
-    employeeElement.value = user.empId;
+    employeeElement.value =
+      user.empId;
   }
 
   if (passwordElement) {
-    passwordElement.value = "demo";
+    passwordElement.value =
+      "demo";
   }
 
-  if (errorElement) {
-    errorElement.classList.add("hidden");
-  }
-
-
-  /*
-     Automatically sign in after selecting
-     a demo account.
-  */
 
   const loginForm =
     document.getElementById("login-form");
 
+
   if (loginForm) {
     loginForm.requestSubmit();
   }
+
+}
+
+
+/* =========================================================
+   LOGIN ERROR
+   ========================================================= */
+
+function showLoginError(message) {
+
+  const errorElement =
+    document.getElementById("login-error");
+
+
+  if (errorElement) {
+    errorElement.textContent =
+      message;
+  }
+
 }
 
 
 /* =========================================================
    SESSION RESTORE
-========================================================= */
+   ========================================================= */
 
 function restoreSession() {
 
@@ -597,31 +450,19 @@ function restoreSession() {
 
   try {
 
-    const parsedUser =
+    const user =
       JSON.parse(savedUser);
 
 
     if (
-      !parsedUser ||
-      !parsedUser.role ||
-      !parsedUser.empId
+      !user ||
+      !DEMO_USERS[user.role]
     ) {
       return false;
     }
 
 
-    const validRole =
-      demoUsers[parsedUser.role];
-
-
-    if (!validRole) {
-      return false;
-    }
-
-
-    store.currentUser = parsedUser;
-
-    showApplication();
+    store.currentUser = user;
 
     return true;
 
@@ -632,18 +473,15 @@ function restoreSession() {
       error
     );
 
-    sessionStorage.removeItem(
-      "progressBridgeUser"
-    );
-
     return false;
   }
+
 }
 
 
 /* =========================================================
    SHOW APPLICATION
-========================================================= */
+   ========================================================= */
 
 function showApplication() {
 
@@ -658,40 +496,21 @@ function showApplication() {
     loginScreen.classList.add("hidden");
   }
 
-
   if (appShell) {
     appShell.classList.remove("hidden");
   }
 
 
   updateUserInterface();
+
 }
 
 
 /* =========================================================
-   LOGOUT
-========================================================= */
+   SHOW LOGIN
+   ========================================================= */
 
-function logoutOfficer() {
-
-  const confirmed =
-    window.confirm(
-      "Are you sure you want to sign out?"
-    );
-
-
-  if (!confirmed) {
-    return;
-  }
-
-
-  store.currentUser = null;
-
-
-  sessionStorage.removeItem(
-    "progressBridgeUser"
-  );
-
+function showLoginScreen() {
 
   const loginScreen =
     document.getElementById("login-screen");
@@ -700,56 +519,30 @@ function logoutOfficer() {
     document.getElementById("app-shell");
 
 
-  if (appShell) {
-    appShell.classList.add("hidden");
-  }
-
-
   if (loginScreen) {
     loginScreen.classList.remove("hidden");
   }
 
-
-  const loginForm =
-    document.getElementById("login-form");
-
-
-  if (loginForm) {
-    loginForm.reset();
+  if (appShell) {
+    appShell.classList.add("hidden");
   }
 
-
-  const errorElement =
-    document.getElementById("login-error");
-
-
-  if (errorElement) {
-    errorElement.classList.add("hidden");
-  }
-
-
-  /*
-     Clear the protected route so the user
-     cannot return to the previous page.
-  */
-
-  window.location.hash = "";
 }
 
 
 /* =========================================================
-   UPDATE USER INTERFACE
-========================================================= */
+   USER INTERFACE
+   ========================================================= */
 
 function updateUserInterface() {
 
-  if (!store.currentUser) {
-    return;
-  }
-
-
   const user =
     store.currentUser;
+
+
+  if (!user) {
+    return;
+  }
 
 
   const sidebarRole =
@@ -766,48 +559,35 @@ function updateUserInterface() {
 
 
   if (sidebarRole) {
-
     sidebarRole.textContent =
       user.designation;
   }
 
-
   if (headerName) {
-
     headerName.textContent =
       user.name;
   }
 
-
   if (headerId) {
-
     headerId.textContent =
-      `${user.designation} • ${user.empId}`;
+      user.empId;
   }
 
-
   if (roleDescription) {
-
-    if (user.role === "FIELD_ENGINEER") {
-
-      roleDescription.textContent =
-        "Submit field progress reports and update site work.";
-
-    } else {
-
-      roleDescription.textContent =
-        "Monitor project progress, verify reports and manage infrastructure work.";
-    }
+    roleDescription.textContent =
+      ROLE_DESCRIPTIONS[user.role] ||
+      "Project monitoring workspace";
   }
 
 
   updateRoleNavigation();
+
 }
 
 
 /* =========================================================
-   ROLE-BASED NAVIGATION
-========================================================= */
+   ROLE NAVIGATION
+   ========================================================= */
 
 function updateRoleNavigation() {
 
@@ -822,98 +602,76 @@ function updateRoleNavigation() {
     );
 
 
-  executiveItems.forEach(item => {
-
-    item.style.display =
-      "none";
-  });
-
-
-  fieldItems.forEach(item => {
-
-    item.style.display =
-      "none";
-  });
+  executiveItems.forEach(
+    item => {
+      item.style.display = "none";
+    }
+  );
 
 
-  if (!store.currentUser) {
-    return;
-  }
+  fieldItems.forEach(
+    item => {
+      item.style.display = "none";
+    }
+  );
 
 
   if (
-    store.currentUser.role ===
+    store.currentUser?.role ===
     "EXECUTIVE_ENGINEER"
   ) {
 
-    executiveItems.forEach(item => {
-
-      item.style.display =
-        "";
-    });
+    executiveItems.forEach(
+      item => {
+        item.style.display = "";
+      }
+    );
 
   }
 
 
   if (
-    store.currentUser.role ===
+    store.currentUser?.role ===
     "FIELD_ENGINEER"
   ) {
 
-    fieldItems.forEach(item => {
+    fieldItems.forEach(
+      item => {
+        item.style.display = "";
+      }
+    );
 
-      item.style.display =
-        "";
-    });
   }
+
 }
 
 
 /* =========================================================
-   ROUTE ACCESS CONTROL
-========================================================= */
+   ROLE ACCESS CONTROL — FRONTEND
+   ========================================================= */
 
 function isRouteAllowed(path) {
 
-  if (!store.currentUser) {
+  const role =
+    store.currentUser?.role;
+
+
+  if (!role) {
     return false;
   }
 
-
-  const role =
-    store.currentUser.role;
-
-
-  /*
-     Dashboard is available to both roles.
-  */
 
   if (path === "/dashboard") {
     return true;
   }
 
 
-  /*
-     Field Engineer:
-     - Dashboard
-     - Field Reports
-  */
-
   if (role === "FIELD_ENGINEER") {
 
     return path === "/reports";
+
   }
 
-
-  /*
-     Executive Engineer:
-     - Dashboard
-     - Projects
-     - Schedule
-     - Verification
-     - Audit
-     - AI Engine
-  */
 
   if (role === "EXECUTIVE_ENGINEER") {
 
@@ -924,95 +682,51 @@ function isRouteAllowed(path) {
       "/audit",
       "/ai-engine"
     ].includes(path);
+
   }
 
 
   return false;
+
 }
 
 
 /* =========================================================
    ROUTER
-========================================================= */
+   ========================================================= */
 
-function navigateTo(route) {
+function navigateTo(path) {
 
   if (!store.currentUser) {
+
+    showLoginScreen();
+
     return;
+
   }
 
 
-  window.location.hash = route;
+  if (!isRouteAllowed(path)) {
 
-  closeMobileSidebar();
+    path = "/dashboard";
+
+  }
+
+
+  window.location.hash =
+    path;
+
+
+  routeApplication(path);
+
 }
 
 
-function router() {
+/* =========================================================
+   ROUTER
+   ========================================================= */
 
-  /*
-     Do not allow protected pages before login.
-  */
-
-  if (!store.currentUser) {
-
-    const loginScreen =
-      document.getElementById("login-screen");
-
-    const appShell =
-      document.getElementById("app-shell");
-
-
-    if (loginScreen) {
-      loginScreen.classList.remove("hidden");
-    }
-
-
-    if (appShell) {
-      appShell.classList.add("hidden");
-    }
-
-
-    return;
-  }
-
-
-  const rawHash =
-    window.location.hash.slice(1) ||
-    "/dashboard";
-
-
-  const parts =
-    rawHash
-      .split("/")
-      .filter(Boolean);
-
-
-  const section =
-    parts[0] || "dashboard";
-
-
-  const parameter =
-    parts[1] || null;
-
-
-  const basePath =
-    `/${section}`;
-
-
-  /*
-     Check whether current role can access
-     this route.
-  */
-
-  if (!isRouteAllowed(basePath)) {
-
-    window.location.hash =
-      "/dashboard";
-
-    return;
-  }
-
+function routeApplication(path) {
 
   const viewport =
     document.getElementById("viewport");
@@ -1023,356 +737,172 @@ function router() {
   }
 
 
-  updateNavigation(section);
+  updateNavigation(path);
 
-  updateBreadcrumb(
-    section,
-    parameter
-  );
+  updateBreadcrumb(path);
 
 
-  switch (section) {
+  switch (path) {
 
-    /* =====================================================
-       DASHBOARD
-    ===================================================== */
-
-    case "dashboard":
+    case "/dashboard":
 
       if (
         typeof renderDashboard ===
         "function"
       ) {
 
-        renderDashboard(viewport);
+        renderDashboard();
 
       } else {
 
         renderModulePlaceholder(
-          viewport,
-          "Dashboard",
-          "Dashboard module is being connected."
+          "Dashboard"
         );
+
       }
 
       break;
 
 
-    /* =====================================================
-       PROJECTS
-    ===================================================== */
+    case "/projects":
 
-    case "projects":
-
-      if (parameter) {
-
-        if (
-          typeof renderProjectDetail ===
-          "function"
-        ) {
-
-          renderProjectDetail(
-            viewport,
-            parameter
-          );
-
-        } else {
-
-          renderModulePlaceholder(
-            viewport,
-            "Project Details",
-            "Project detail module is being connected."
-          );
-        }
-
-      } else {
-
-        if (
-          typeof renderProjectsList ===
-          "function"
-        ) {
-
-          renderProjectsList(viewport);
-
-        } else {
-
-          renderModulePlaceholder(
-            viewport,
-            "Projects",
-            "Project list module is being connected."
-          );
-        }
-      }
+      renderModulePlaceholder(
+        "Projects"
+      );
 
       break;
 
 
-    /* =====================================================
-       SCHEDULE
-    ===================================================== */
-
-    case "schedule":
-
-      if (parameter) {
-
-        if (
-          typeof renderTaskDetail ===
-          "function"
-        ) {
-
-          renderTaskDetail(
-            viewport,
-            parameter
-          );
-
-        } else {
-
-          renderModulePlaceholder(
-            viewport,
-            "Task Details",
-            "Task detail module is being connected."
-          );
-        }
-
-      } else {
-
-        if (
-          typeof renderSchedule ===
-          "function"
-        ) {
-
-          renderSchedule(viewport);
-
-        } else {
-
-          renderModulePlaceholder(
-            viewport,
-            "Schedule of Works",
-            "Schedule module is being connected."
-          );
-        }
-      }
-
-      break;
-
-
-    /* =====================================================
-       FIELD REPORTS
-    ===================================================== */
-
-    case "reports":
+    case "/schedule":
 
       if (
-        typeof renderReportSubmission ===
+        typeof renderSchedule ===
         "function"
       ) {
 
-        renderReportSubmission(
-          viewport
-        );
+        renderSchedule();
 
       } else {
 
         renderModulePlaceholder(
-          viewport,
-          "Field Reports",
-          "The field report module will be connected by Member 2."
+          "Schedule of Works"
         );
+
       }
 
       break;
 
 
-    /* =====================================================
-       VERIFICATION
-    ===================================================== */
+    case "/reports":
 
-    case "verification":
+      if (
+        typeof renderReports ===
+        "function"
+      ) {
+
+        renderReports();
+
+      } else {
+
+        renderModulePlaceholder(
+          "Field Reports"
+        );
+
+      }
+
+      break;
+
+
+    case "/verification":
 
       if (
         typeof renderVerification ===
         "function"
       ) {
 
-        renderVerification(
-          viewport
-        );
+        renderVerification();
 
       } else {
 
         renderModulePlaceholder(
-          viewport,
-          "Verification",
-          "The verification module will be connected by Member 2."
+          "Verification Desk"
         );
+
       }
 
       break;
 
 
-    /* =====================================================
-       AUDIT
-    ===================================================== */
+    case "/audit":
 
-    case "audit":
-
-      if (
-        typeof renderAudit ===
-        "function"
-      ) {
-
-        renderAudit(
-          viewport
-        );
-
-      } else {
-
-        renderModulePlaceholder(
-          viewport,
-          "Activity Log",
-          "The activity log will be connected to the backend audit records."
-        );
-      }
+      renderModulePlaceholder(
+        "Audit Log"
+      );
 
       break;
 
 
-    /* =====================================================
-       AI ENGINE
-    ===================================================== */
+    case "/ai-engine":
 
-    case "ai-engine":
-
-      if (
-        typeof renderAIEngine ===
-        "function"
-      ) {
-
-        renderAIEngine(
-          viewport
-        );
-
-      } else {
-
-        renderModulePlaceholder(
-          viewport,
-          "AI Progress Analysis",
-          "AI-based progress analysis will be connected here."
-        );
-      }
+      renderModulePlaceholder(
+        "AI Matching Engine"
+      );
 
       break;
 
-
-    /* =====================================================
-       FALLBACK
-    ===================================================== */
 
     default:
 
-      viewport.innerHTML = `
+      navigateTo("/dashboard");
 
-        <section class="gov-card">
-
-          <h2 class="page-title">
-            Page not found
-          </h2>
-
-          <p class="page-subtitle">
-            The page you requested does not exist.
-          </p>
-
-          <button
-            class="gov-btn gov-btn-primary"
-            onclick="navigateTo('/dashboard')"
-          >
-            Go to Dashboard
-          </button>
-
-        </section>
-
-      `;
   }
 
-
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
 }
 
 
 /* =========================================================
-   NAVIGATION UI
-========================================================= */
+   NAVIGATION STATE
+   ========================================================= */
 
-function updateNavigation(section) {
+function updateNavigation(path) {
 
-  document
-    .querySelectorAll(
+  const links =
+    document.querySelectorAll(
       ".nav-link, .sidebar-nav a"
-    )
-    .forEach(link => {
-
-      link.classList.remove(
-        "active"
-      );
-    });
-
-
-  const active =
-    document.getElementById(
-      `nav-${section}`
     );
 
 
-  if (active) {
+  links.forEach(link => {
 
-    active.classList.add(
+    link.classList.remove(
       "active"
     );
-  }
+
+
+    const href =
+      link.getAttribute("href");
+
+
+    if (
+      href === `#${path}`
+    ) {
+
+      link.classList.add(
+        "active"
+      );
+
+    }
+
+  });
+
 }
 
 
 /* =========================================================
    BREADCRUMB
-========================================================= */
+   ========================================================= */
 
-function updateBreadcrumb(
-  section,
-  parameter
-) {
-
-  const labels = {
-
-    dashboard:
-      "Dashboard",
-
-    projects:
-      parameter
-        ? "Project Details"
-        : "Projects",
-
-    schedule:
-      parameter
-        ? "Task Details"
-        : "Schedule of Works",
-
-    reports:
-      "Field Reports",
-
-    verification:
-      "Verification",
-
-    audit:
-      "Activity Log",
-
-    "ai-engine":
-      "AI Progress Analysis"
-
-  };
-
+function updateBreadcrumb(path) {
 
   const breadcrumb =
     document.getElementById(
@@ -1380,60 +910,188 @@ function updateBreadcrumb(
     );
 
 
-  if (breadcrumb) {
-
-    breadcrumb.textContent =
-      labels[section] ||
-      "Page";
+  if (!breadcrumb) {
+    return;
   }
-}
 
 
-/* =========================================================
-   STATUS HELPERS
-========================================================= */
+  const labels = {
 
-function getStatusBadge(status) {
+    "/dashboard":
+      "Dashboard",
 
-  const statusMap = {
+    "/projects":
+      "Projects",
 
-    Completed:
-      "status-completed",
+    "/schedule":
+      "Schedule of Works",
 
-    "On Track":
-      "status-on-track",
+    "/reports":
+      "Field Reports",
 
-    Delayed:
-      "status-delayed",
+    "/verification":
+      "Verification Desk",
 
-    "At Risk":
-      "status-at-risk",
+    "/audit":
+      "Audit Log",
 
-    Upcoming:
-      "status-upcoming",
-
-    Approved:
-      "status-approved",
-
-    Rejected:
-      "status-rejected",
-
-    "Pending Review":
-      "status-pending"
+    "/ai-engine":
+      "AI Matching"
 
   };
 
 
-  return (
-    statusMap[status] ||
-    "status-upcoming"
-  );
+  breadcrumb.textContent =
+    labels[path] ||
+    "Dashboard";
+
 }
 
 
 /* =========================================================
-   UI HELPERS
-========================================================= */
+   STATUS BADGES
+   ========================================================= */
+
+function getStatusBadge(status) {
+
+  const normalized =
+    String(status || "")
+      .trim()
+      .toLowerCase();
+
+
+  const statusMap = {
+
+    "completed":
+      "status-success",
+
+    "on track":
+      "status-success",
+
+    "delayed":
+      "status-warning",
+
+    "at risk":
+      "status-danger",
+
+    "upcoming":
+      "status-info",
+
+    "approved":
+      "status-success",
+
+    "rejected":
+      "status-danger",
+
+    "pending review":
+      "status-warning"
+
+  };
+
+
+  const className =
+    statusMap[normalized] ||
+    "status-neutral";
+
+
+  return `
+    <span class="status-badge ${className}">
+      ${escapeHtml(status || "Unknown")}
+    </span>
+  `;
+
+}
+
+
+/* =========================================================
+   HTML ESCAPE HELPER
+   ========================================================= */
+
+function escapeHtml(value) {
+
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+
+}
+
+
+/* =========================================================
+   MODULE PLACEHOLDER
+   ========================================================= */
+
+function renderModulePlaceholder(title) {
+
+  const viewport =
+    document.getElementById(
+      "viewport"
+    );
+
+
+  if (!viewport) {
+    return;
+  }
+
+
+  viewport.innerHTML = `
+
+    <section class="page-header">
+
+      <div>
+
+        <h1 class="page-title">
+          ${escapeHtml(title)}
+        </h1>
+
+        <p class="page-subtitle">
+          This module is being integrated
+          with the ProgressBridge backend.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <section class="gov-card">
+
+      <div class="gov-card-header">
+
+        <div>
+
+          <h3>
+            Module Ready
+          </h3>
+
+          <p>
+            Frontend integration point
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <p class="text-muted">
+
+        The interface is ready for
+        backend/API integration.
+
+      </p>
+
+    </section>
+
+  `;
+
+}
+
+
+/* =========================================================
+   SIDEBAR HELPERS
+   ========================================================= */
 
 function toggleSidebar() {
 
@@ -1442,26 +1100,16 @@ function toggleSidebar() {
       "sidebar"
     );
 
-  const overlay =
-    document.getElementById(
-      "sidebar-overlay"
-    );
 
-
-  if (sidebar) {
-
-    sidebar.classList.toggle(
-      "open"
-    );
+  if (!sidebar) {
+    return;
   }
 
 
-  if (overlay) {
+  sidebar.classList.toggle(
+    "open"
+  );
 
-    overlay.classList.toggle(
-      "visible"
-    );
-  }
 }
 
 
@@ -1472,121 +1120,125 @@ function closeMobileSidebar() {
       "sidebar"
     );
 
-  const overlay =
-    document.getElementById(
-      "sidebar-overlay"
-    );
 
-
-  if (sidebar) {
-
-    sidebar.classList.remove(
-      "open"
-    );
-  }
-
-
-  if (overlay) {
-
-    overlay.classList.remove(
-      "visible"
-    );
-  }
-}
-
-
-/* =========================================================
-   USER MENU
-========================================================= */
-
-function showUserMenu() {
-
-  if (!store.currentUser) {
-
-    alert(
-      "You are not signed in."
-    );
-
+  if (!sidebar) {
     return;
   }
 
 
-  alert(
-    `Signed in as ${store.currentUser.name}\n` +
-    `${store.currentUser.designation}\n` +
-    `Employee ID: ${store.currentUser.empId}`
+  sidebar.classList.remove(
+    "open"
   );
+
 }
 
 
 /* =========================================================
-   MODULE PLACEHOLDER
-========================================================= */
+   LOGOUT
+   ========================================================= */
 
-function renderModulePlaceholder(
-  target,
-  title,
-  description
-) {
+function logoutOfficer() {
 
-  target.innerHTML = `
-
-    <div class="page-header">
-
-      <div>
-
-        <h2 class="page-title">
-          ${title}
-        </h2>
-
-        <p class="page-subtitle">
-          ${description}
-        </p>
-
-      </div>
-
-    </div>
+  const confirmed =
+    window.confirm(
+      "Are you sure you want to sign out?"
+    );
 
 
-    <section class="gov-card">
+  if (!confirmed) {
+    return;
+  }
 
-      <div class="empty-state">
 
-        <strong>
-          Module connection point
-        </strong>
+  store.currentUser =
+    null;
 
-        <p>
-          This screen is ready for the
-          corresponding team member's module.
-        </p>
 
-      </div>
+  sessionStorage.removeItem(
+    "progressBridgeUser"
+  );
 
-    </section>
 
-  `;
+  showLoginScreen();
+
+
+  const form =
+    document.getElementById(
+      "login-form"
+    );
+
+
+  if (form) {
+    form.reset();
+  }
+
+
+  const error =
+    document.getElementById(
+      "login-error"
+    );
+
+
+  if (error) {
+    error.textContent = "";
+  }
+
+
+  window.location.hash =
+    "";
+
+
+  window.scrollTo(
+    0,
+    0
+  );
+
 }
 
 
 /* =========================================================
-   START APPLICATION
-========================================================= */
+   HASH ROUTING
+   ========================================================= */
 
 window.addEventListener(
   "hashchange",
-  router
+  () => {
+
+    if (!store.currentUser) {
+      return;
+    }
+
+
+    const path =
+      window.location.hash
+        .replace(/^#/, "") ||
+      "/dashboard";
+
+
+    if (!isRouteAllowed(path)) {
+
+      routeApplication(
+        "/dashboard"
+      );
+
+      return;
+
+    }
+
+
+    routeApplication(path);
+
+  }
 );
 
 
-window.addEventListener(
-  "load",
-  () => {
+/* =========================================================
+   APPLICATION STARTUP
+   ========================================================= */
 
-    /*
-       First try to restore the previous
-       signed-in session.
-    */
+document.addEventListener(
+  "DOMContentLoaded",
+  () => {
 
     const restored =
       restoreSession();
@@ -1594,69 +1246,23 @@ window.addEventListener(
 
     if (restored) {
 
-      /*
-         If a valid session exists,
-         open the saved route or dashboard.
-      */
-
-      if (window.location.hash) {
-
-        router();
-
-      } else {
-
-        navigateTo(
-          "/dashboard"
-        );
-      }
-
-      return;
-    }
+      showApplication();
 
 
-    /*
-       No session = show Sign In.
-    */
-
-    const loginScreen =
-      document.getElementById(
-        "login-screen"
-      );
-
-    const appShell =
-      document.getElementById(
-        "app-shell"
-      );
+      const path =
+        window.location.hash
+          .replace(/^#/, "") ||
+        "/dashboard";
 
 
-    if (loginScreen) {
+      navigateTo(path);
 
-      loginScreen.classList.remove(
-        "hidden"
-      );
-    }
+    } else {
 
+      showLoginScreen();
 
-    if (appShell) {
+      window.location.hash = "";
 
-      appShell.classList.add(
-        "hidden"
-      );
-    }
-
-
-    /*
-       Clear stale protected route.
-    */
-
-    if (window.location.hash) {
-
-      window.history.replaceState(
-        null,
-        "",
-        window.location.pathname +
-        window.location.search
-      );
     }
 
   }
