@@ -795,23 +795,24 @@ function routeApplication(path) {
 
     case "/reports":
 
-      if (
-        typeof renderReports ===
-        "function"
-      ) {
+  if (
+    typeof renderReportSubmission ===
+    "function"
+  ) {
 
-        renderReports();
+    renderReportSubmission(
+      viewport
+    );
 
-      } else {
+  } else {
 
-        renderModulePlaceholder(
-          "Field Reports"
-        );
+    renderModulePlaceholder(
+      "Field Reports"
+    );
 
-      }
+  }
 
-      break;
-
+  break;
 
     case "/verification":
 
