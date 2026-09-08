@@ -50,7 +50,7 @@ const store = {
       planned: 72,
       actual: 68,
       status: "On Track",
-      activities: 6
+      activities: 6,
 
       // Prototype/demo geofence.
   // Replace with the actual construction-site coordinates later.
@@ -68,7 +68,7 @@ const store = {
       planned: 85,
       actual: 81,
       status: "On Track",
-      activities: 5
+      activities: 5,
 
       // Prototype/demo geofence.
   // Replace with the actual construction-site coordinates later.
@@ -87,7 +87,7 @@ const store = {
       planned: 55,
       actual: 49,
       status: "Delayed",
-      activities: 4
+      activities: 4,
 
       // Prototype/demo geofence.
   // Replace with the actual construction-site coordinates later.
@@ -97,6 +97,7 @@ const store = {
     radiusMeters: 5000
   
     }
+  }
 
   ],
 
