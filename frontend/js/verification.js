@@ -498,3 +498,298 @@ async function sha256Hex(message) {
     .map(byte => byte.toString(16).padStart(2, "0"))
     .join("");
 }
+
+/* =========================================================
+   AUDIT LOG
+   ---------------------------------------------------------
+   Displays the SHA-256 hash-chained ledger built by
+   appendAuditEntry() every time a verification decision is
+   made. Also lets an officer re-verify the chain by
+   recomputing each hash and checking it against the stored
+   value + the previous entry's hash.
+   ========================================================= */
+
+function renderAuditLog(target) {
+
+  const entries = store.auditTrail || [];
+
+  target.innerHTML = `
+
+    <div class="page-header">
+
+      <div>
+        <h2 class="page-title">Audit Log</h2>
+        <p class="page-subtitle">
+          Tamper-evident record of every verification decision, chained by SHA-256 hash.
+        </p>
+      </div>
+
+      <button
+        class="gov-btn gov-btn-secondary"
+        onclick="verifyAuditChainIntegrity()"
+      >
+        Verify Chain Integrity
+      </button>
+
+    </div>
+
+
+    <div id="audit-integrity-result"></div>
+
+
+    <section class="gov-card">
+
+      <div class="gov-card-header">
+        <div>
+          <h3>Ledger Entries</h3>
+          <p>${entries.length} entr${entries.length === 1 ? "y" : "ies"} recorded</p>
+        </div>
+      </div>
+
+      ${
+        entries.length
+          ? renderAuditTable(entries)
+          : `
+            <div class="empty-state">
+              <strong>No audit entries yet</strong>
+              <p>Entries are created automatically when a report is approved or rejected at the Verification Desk.</p>
+            </div>
+          `
+      }
+
+    </section>
+  `;
+}
+
+
+function renderAuditTable(entries) {
+
+  return `
+    <div class="table-container">
+
+      <table class="gov-table">
+
+        <thead>
+          <tr>
+            <th>Timestamp</th>
+            <th>Activity</th>
+            <th>Decision</th>
+            <th>Officer</th>
+            <th>Hash</th>
+            <th>Previous Hash</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          ${entries
+            .map(
+              (entry, index) => `
+                <tr>
+
+                  <td>${new Date(entry.timestamp).toLocaleString()}</td>
+
+                  <td>
+                    <div class="task-name">${entry.activityCode || "—"}</div>
+                    <div class="table-muted">${entry.reportId}</div>
+                  </td>
+
+                  <td>${getStatusBadge(entry.decision)}</td>
+
+                  <td>${entry.officerEmpId}</td>
+
+                  <td class="table-muted" style="font-family: monospace;">
+                    ${entry.hash.slice(0, 12)}…
+                  </td>
+
+                  <td class="table-muted" style="font-family: monospace;">
+                    ${
+                      index === 0
+                        ? "genesis"
+                        : entry.previousHash.slice(0, 12) + "…"
+                    }
+                  </td>
+
+                </tr>
+              `
+            )
+            .join("")}
+
+        </tbody>
+
+      </table>
+
+    </div>
+  `;
+}
+
+
+async function verifyAuditChainIntegrity() {
+
+  const resultEl = document.getElementById("audit-integrity-result");
+  if (!resultEl) return;
+
+  const entries = store.auditTrail || [];
+
+  if (!entries.length) {
+    resultEl.innerHTML = `
+      <div class="notice">
+        <strong>Nothing to verify:</strong>
+        <span>The audit trail is empty.</span>
+      </div>
+    `;
+    return;
+  }
+
+  let expectedPrevious = "0".repeat(64);
+  let brokenAt = null;
+
+  for (const entry of entries) {
+
+    const combined =
+      `${entry.timestamp}|${entry.decision}|${entry.reportId}|${entry.officerEmpId}|${expectedPrevious}`;
+
+    const recomputed = await sha256Hex(combined);
+
+    if (
+      entry.previousHash !== expectedPrevious ||
+      recomputed !== entry.hash
+    ) {
+      brokenAt = entry.reportId;
+      break;
+    }
+
+    expectedPrevious = entry.hash;
+  }
+
+  resultEl.innerHTML = brokenAt
+    ? `
+      <div class="notice" style="border-color:#f0c5c1; background:#fdf2f1;">
+        <strong>⚠ Chain broken at ${brokenAt}:</strong>
+        <span>Recomputed hash does not match the stored value. The ledger may have been tampered with.</span>
+      </div>
+    `
+    : `
+      <div class="notice" style="border-color:#c7e6c9; background:#f2faf2;">
+        <strong>✔ Chain verified:</strong>
+        <span>All ${entries.length} entries are intact and correctly linked.</span>
+      </div>
+    `;
+}
+
+
+/* =========================================================
+   AI MATCHING ENGINE VIEW
+   ---------------------------------------------------------
+   Shows what the semantic-similarity matcher recommended
+   for each submitted field report vs. what the field
+   engineer claimed, so an officer can see the AI's
+   reasoning before it ever reaches the Verification Desk.
+   ========================================================= */
+
+function renderAIMatching(target) {
+
+  const reports = store.reports || [];
+
+  target.innerHTML = `
+
+    <div class="page-header">
+
+      <div>
+        <h2 class="page-title">AI Matching Engine</h2>
+        <p class="page-subtitle">
+          Semantic-similarity matching between submitted field narratives and Schedule of Works activities.
+        </p>
+      </div>
+
+    </div>
+
+
+    <section class="gov-card">
+
+      <div class="gov-card-header">
+        <div>
+          <h3>Recent Matches</h3>
+          <p>${reports.length} report(s) processed</p>
+        </div>
+      </div>
+
+      ${
+        reports.length
+          ? renderAIMatchTable(reports)
+          : `
+            <div class="empty-state">
+              <strong>No reports processed yet</strong>
+              <p>AI matches will appear here once field reports are submitted.</p>
+            </div>
+          `
+      }
+
+    </section>
+  `;
+}
+
+
+function renderAIMatchTable(reports) {
+
+  return `
+    <div class="table-container">
+
+      <table class="gov-table">
+
+        <thead>
+          <tr>
+            <th>Report</th>
+            <th>Claimed Activity</th>
+            <th>AI Recommended</th>
+            <th>Confidence</th>
+            <th>Match</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          ${reports
+            .map(
+              report => `
+                <tr>
+
+                  <td>
+                    <div class="task-name">${report.projectName}</div>
+                    <div class="table-muted">${report.id}</div>
+                  </td>
+
+                  <td>${report.activityCode} — ${report.claimedDiscipline}</td>
+
+                  <td>${report.aiMatch.recommendedActivityCode}</td>
+
+                  <td>
+                    <strong>${report.aiMatch.confidenceScore}%</strong>
+                    <div class="progress-container" style="margin-top:4px; max-width:120px;">
+                      <div
+                        class="progress-fill progress-${getConfidenceClass(report.aiMatch.confidenceScore)}"
+                        style="width:${report.aiMatch.confidenceScore}%;"
+                      ></div>
+                    </div>
+                  </td>
+
+                  <td>
+                    ${
+                      report.aiMatch.recommendedActivityCode === report.activityCode
+                        ? '<span class="status-badge status-success">Aligned</span>'
+                        : '<span class="status-badge status-warning">Mismatch</span>'
+                    }
+                  </td>
+
+                </tr>
+              `
+            )
+            .join("")}
+
+        </tbody>
+
+      </table>
+
+    </div>
+  `;
+}
