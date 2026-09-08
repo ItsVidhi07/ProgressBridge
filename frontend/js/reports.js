@@ -123,7 +123,7 @@ function renderReportSubmission(target) {
                 .map(
                   task => `
                     <option value="${task.id}">
-                      ${task.code} — ${task.description}
+                      ${task.id} — ${task.description}
                     </option>
                   `
                 )
@@ -584,10 +584,10 @@ function submitFieldReport(event) {
   const report = {
     id: `RPT-${Date.now()}`,
     projectId: project.id,
-    projectCode: project.code,
+    projectCode: project.id,
     projectName: project.name,
     activityId: activity.id,
-    activityCode: activity.code,
+    activityCode: activity.id,
     activityDescription: activity.description,
     claimedDiscipline: discipline,
     claimedProgress: progress,
