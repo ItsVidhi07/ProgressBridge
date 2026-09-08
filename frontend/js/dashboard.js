@@ -2,7 +2,12 @@
    MEMBER 1 — DASHBOARD & PROJECT VIEWS
 ========================================================= */
 
-function renderDashboard(target) {
+function renderDashboard() {
+
+  const target =
+    document.getElementById("viewport");
+
+  if (!target) return;
 
   const project =
     store.projects.find(
@@ -16,9 +21,18 @@ function renderDashboard(target) {
         task.projectId === project.id
     );
 
+  const completedCount =
+    tasks.filter(t => t.status === "Completed").length;
+
+  const delayedCount =
+    tasks.filter(t => t.status === "Delayed").length;
+
+  const atRiskCount =
+    tasks.filter(t => t.status === "At Risk").length;
+
   const progressGap =
-    project.actualProgress -
-    project.plannedProgress;
+    project.actual -
+    project.planned;
 
   const gapText =
     progressGap >= 0
