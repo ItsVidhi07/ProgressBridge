@@ -816,23 +816,24 @@ function routeApplication(path) {
 
     case "/verification":
 
-      if (
-        typeof renderVerification ===
-        "function"
-      ) {
+  if (
+    typeof renderVerification ===
+    "function"
+  ) {
 
-        renderVerification();
+    renderVerification(
+      viewport
+    );
 
-      } else {
+  } else {
 
-        renderModulePlaceholder(
-          "Verification Desk"
-        );
+    renderModulePlaceholder(
+      "Verification Desk"
+    );
 
-      }
+  }
 
-      break;
-
+  break;
 
     case "/audit":
 
