@@ -190,9 +190,7 @@ function renderDecidedTable(reports) {
                   </td>
 
                   <td>
-                    <span class="status-badge ${getStatusBadge(report.status)}">
-                      ${report.status}
-                    </span>
+                    ${getStatusBadge(report.status)}
                   </td>
 
                   <td>${report.decidedBy || "—"}</td>
