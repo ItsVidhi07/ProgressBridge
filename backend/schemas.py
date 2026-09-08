@@ -29,7 +29,7 @@ class ProgressReportResponse(BaseModel):
     id: int
     created_at: datetime
     activity_id: int
-   claimed_progress: float
+    claimed_progress: float
     report_date: datetime
 
 
