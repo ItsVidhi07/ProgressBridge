@@ -3365,3 +3365,7 @@ textarea:focus-visible {
     text-align: left;
   }
 }
+
+.kpi-card.completed::before { background: var(--success); }
+.kpi-card.delayed::before   { background: var(--warning); }
+.kpi-card.risk::before      { background: var(--danger); }
