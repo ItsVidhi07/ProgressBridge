@@ -68,7 +68,7 @@ function renderReportSubmission(target) {
 
         <div>
           <h3>Report Details</h3>
-          <p>${project.code} — ${project.name}</p>
+          <p>${project.id} — ${project.name}</p>
         </div>
 
       </div>
