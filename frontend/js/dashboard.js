@@ -75,11 +75,11 @@ function renderDashboard() {
 
       <article class="kpi-card">
 
-        <div class="kpi-label">
+        <div class="kpi-title">
           Current Progress
         </div>
 
-        <div class="kpi-value">
+        <div class="kpi-val">
           ${project.actual}%
         </div>
 
@@ -143,19 +143,19 @@ function renderDashboard() {
     </section>
 
 
-    <section class="project-summary">
+    <section class="content-grid-wide">
 
       <article class="gov-card project-main">
 
-        <div class="project-code">
+        <div class="card-label">
           ${project.id}
         </div>
 
-        <h3 class="project-name">
+        <h3 class="report-title">
           ${project.name}
         </h3>
 
-        <div class="project-meta">
+        <div class="card-meta">
 
           <span>
             ${project.location}
@@ -182,13 +182,15 @@ function renderDashboard() {
 
           </div>
 
-          <div class="progress-track">
+          
 
             <div
               class="progress-bar ${
-                progressGap < -5
-                  ? "warning"
-                  : ""
+                class="progress-fill ${
++       progressGap < -5 ? "progress-warning" : ""
+      }"
+      style="width:${project.actual}%"
+    ></div>
               }"
               style="width:${project.actual}%"
             ></div>
@@ -246,15 +248,10 @@ function renderDashboard() {
         </div>
 
 
-        <div class="info-item">
-
-          <div class="info-label">
-            Work status
-          </div>
-
-          <div class="info-value">
-            ${project.status}
-          </div>
+        <div class="info-panel">
+   <div class="info-panel-label">Work status</div>
+   <div class="info-panel-value">${project.status}</div>
+  </div>
 
         </div>
 
@@ -263,7 +260,10 @@ function renderDashboard() {
     </section>
 
 
-    <div class="notice">
+    <div class="alert alert-info">
+    <strong>Why this matters:</strong>
+    <span>...</span>
+  </div>
 
       <strong>
         Why this matters:
@@ -677,15 +677,10 @@ function renderProjectDetail(
 
       <div class="info-grid">
 
-        <div class="info-item">
-
-          <div class="info-label">
-            Planned progress
-          </div>
-
-          <div class="info-value">
-            ${project.planned}%
-          </div>
+      <div class="info-panel">
+         <div class="info-panel-label">Planned progress</div>
+         <div class="info-panel-value">${project.planned}%</div>
+     </div>
 
         </div>
 
