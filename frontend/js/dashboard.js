@@ -75,11 +75,11 @@ function renderDashboard() {
 
       <article class="kpi-card">
 
-        <div class="kpi-title">
+        <div class="kpi-label">
           Current Progress
         </div>
 
-        <div class="kpi-val">
+        <div class="kpi-value">
           ${project.actual}%
         </div>
 
@@ -143,19 +143,20 @@ function renderDashboard() {
     </section>
 
 
-    <section class="content-grid-wide">
+    <section class="project-summary">
 
       <article class="gov-card project-main">
 
-        <div class="card-label">
+        <div class="project-code">
           ${project.id}
         </div>
 
-        <h3 class="report-title">
+        <h3 class="project-name">
+
           ${project.name}
         </h3>
 
-        <div class="card-meta">
+        <div class="project-meta">
 
           <span>
             ${project.location}
@@ -183,17 +184,13 @@ function renderDashboard() {
           </div>
 
           
-
+            <div class="progress-track">
             <div
-              class="progress-bar ${
-                class="progress-fill ${
-+       progressGap < -5 ? "progress-warning" : ""
-      }"
+                 class="progress-bar ${
+-       progressGap < -5 ? "warning" : ""}"
       style="width:${project.actual}%"
     ></div>
-              }"
-              style="width:${project.actual}%"
-            ></div>
+
 
           </div>
 
@@ -248,10 +245,9 @@ function renderDashboard() {
         </div>
 
 
-        <div class="info-panel">
-   <div class="info-panel-label">Work status</div>
-   <div class="info-panel-value">${project.status}</div>
-  </div>
+        <div class="info-item">
+           <div class="info-label">Work status</div>
+           <div class="info-value">${project.status}</div>
 
         </div>
 
@@ -260,7 +256,7 @@ function renderDashboard() {
     </section>
 
 
-    <div class="alert alert-info">
+    <div class="notice">
     <strong>Why this matters:</strong>
     <span>...</span>
   </div>
@@ -677,12 +673,10 @@ function renderProjectDetail(
 
       <div class="info-grid">
 
-      <div class="info-panel">
-         <div class="info-panel-label">Planned progress</div>
-         <div class="info-panel-value">${project.planned}%</div>
-     </div>
-
-        </div>
+      <div class="info-item">
+          <div class="info-label">Planned progress</div>
+          <div class="info-value">${project.planned}%</div>
+      </div>
 
 
         <div class="info-item">
