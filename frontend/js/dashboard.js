@@ -22,13 +22,19 @@ function renderDashboard() {
     );
 
   const completedCount =
-    tasks.filter(t => t.status === "Completed").length;
+    tasks.filter(
+      task => task.status === "Completed"
+    ).length;
 
   const delayedCount =
-    tasks.filter(t => t.status === "Delayed").length;
+    tasks.filter(
+      task => task.status === "Delayed"
+    ).length;
 
   const atRiskCount =
-    tasks.filter(t => t.status === "At Risk").length;
+    tasks.filter(
+      task => task.status === "At Risk"
+    ).length;
 
   const progressGap =
     project.actual -
@@ -62,13 +68,6 @@ function renderDashboard() {
 
       </div>
 
-      <button
-        class="gov-btn gov-btn-secondary"
-        onclick="navigateTo('/projects/${project.id}')"
-      >
-        View Project
-      </button>
-
     </div>
 
 
@@ -81,7 +80,7 @@ function renderDashboard() {
         </div>
 
         <div class="kpi-value">
-          ${project.actualProgress}%
+          ${project.actual}%
         </div>
 
         <div class="kpi-description">
@@ -98,7 +97,7 @@ function renderDashboard() {
         </div>
 
         <div class="kpi-value">
-          ${project.completedActivities}
+          ${completedCount}
         </div>
 
         <div class="kpi-description">
@@ -115,7 +114,7 @@ function renderDashboard() {
         </div>
 
         <div class="kpi-value">
-          ${project.delayedActivities}
+          ${delayedCount}
         </div>
 
         <div class="kpi-description">
@@ -132,7 +131,7 @@ function renderDashboard() {
         </div>
 
         <div class="kpi-value">
-          ${project.atRiskActivities}
+          ${atRiskCount}
         </div>
 
         <div class="kpi-description">
@@ -149,7 +148,7 @@ function renderDashboard() {
       <article class="gov-card project-main">
 
         <div class="project-code">
-          ${project.code}
+          ${project.id}
         </div>
 
         <h3 class="project-name">
@@ -157,10 +156,6 @@ function renderDashboard() {
         </h3>
 
         <div class="project-meta">
-
-          <span>
-            ${project.department}
-          </span>
 
           <span>
             ${project.location}
@@ -182,7 +177,7 @@ function renderDashboard() {
             </span>
 
             <strong>
-              ${project.actualProgress}%
+              ${project.actual}%
             </strong>
 
           </div>
@@ -195,16 +190,16 @@ function renderDashboard() {
                   ? "warning"
                   : ""
               }"
-              style="width:${project.actualProgress}%"
+              style="width:${project.actual}%"
             ></div>
 
           </div>
 
           <div class="progress-gap">
 
-            Planned: ${project.plannedProgress}%
+            Planned: ${project.planned}%
             &nbsp; · &nbsp;
-            Current: ${project.actualProgress}%
+            Current: ${project.actual}%
             &nbsp; · &nbsp;
             ${gapText}
 
@@ -240,7 +235,7 @@ function renderDashboard() {
                         : ""
                     }
                   >
-                    ${item.code} — ${item.name}
+                    ${item.id} — ${item.name}
                   </option>
                 `
               )
@@ -336,7 +331,7 @@ function renderDashboard() {
                             </div>
 
                             <div class="table-muted">
-                              ${task.code}
+                              ${task.id}
                             </div>
 
                           </td>
@@ -352,7 +347,7 @@ function renderDashboard() {
                           </td>
 
                           <td>
-                            ${task.finish}
+                            ${task.end}
                           </td>
 
                           <td>
@@ -371,7 +366,7 @@ function renderDashboard() {
 
                             <button
                               class="gov-btn gov-btn-secondary gov-btn-sm"
-                              onclick="navigateTo('/schedule/${task.id}')"
+                              onclick="navigateTo('/schedule')"
                             >
                               View
                             </button>
@@ -434,7 +429,6 @@ function renderDashboard() {
               <th>Work Type</th>
               <th>Progress</th>
               <th>Status</th>
-              <th></th>
 
             </tr>
 
@@ -455,7 +449,7 @@ function renderDashboard() {
                       </div>
 
                       <div class="table-muted">
-                        ${task.code}
+                        ${task.id}
                       </div>
 
                     </td>
@@ -477,17 +471,6 @@ function renderDashboard() {
                       >
                         ${task.status}
                       </span>
-
-                    </td>
-
-                    <td>
-
-                      <button
-                        class="gov-btn gov-btn-secondary gov-btn-sm"
-                        onclick="navigateTo('/schedule/${task.id}')"
-                      >
-                        Details
-                      </button>
 
                     </td>
 
@@ -513,11 +496,7 @@ function changeDashboardProject(projectId) {
   store.selectedProjectId =
     projectId;
 
-  renderDashboard(
-    document.getElementById(
-      "viewport"
-    )
-  );
+  renderDashboard();
 }
 
 
@@ -525,7 +504,12 @@ function changeDashboardProject(projectId) {
    PROJECT LIST
 ========================================================= */
 
-function renderProjectsList(target) {
+function renderProjectsList() {
+
+  const target =
+    document.getElementById("viewport");
+
+  if (!target) return;
 
   target.innerHTML = `
 
@@ -557,11 +541,9 @@ function renderProjectsList(target) {
             <tr>
 
               <th>Project</th>
-              <th>Department</th>
               <th>Location</th>
               <th>Progress</th>
               <th>Status</th>
-              <th></th>
 
             </tr>
 
@@ -582,13 +564,9 @@ function renderProjectsList(target) {
                       </div>
 
                       <div class="table-muted">
-                        ${project.code}
+                        ${project.id}
                       </div>
 
-                    </td>
-
-                    <td>
-                      ${project.department}
                     </td>
 
                     <td>
@@ -597,26 +575,19 @@ function renderProjectsList(target) {
 
                     <td>
                       <strong>
-                        ${project.actualProgress}%
+                        ${project.actual}%
                       </strong>
                     </td>
 
                     <td>
 
-                      <span class="status-badge status-on-track">
+                      <span
+                        class="status-badge ${getStatusBadge(
+                          project.status
+                        )}"
+                      >
                         ${project.status}
                       </span>
-
-                    </td>
-
-                    <td>
-
-                      <button
-                        class="gov-btn gov-btn-primary gov-btn-sm"
-                        onclick="navigateTo('/projects/${project.id}')"
-                      >
-                        Open
-                      </button>
 
                     </td>
 
@@ -639,6 +610,8 @@ function renderProjectsList(target) {
 
 /* =========================================================
    PROJECT DETAIL
+   (not yet routed — call renderProjectDetail(target, projectId)
+   once a "/projects/:id" route is wired up in app.js)
 ========================================================= */
 
 function renderProjectDetail(
@@ -654,11 +627,12 @@ function renderProjectDetail(
 
   if (!project) {
 
-    renderModulePlaceholder(
-      target,
-      "Project not found",
-      "The selected project could not be found."
-    );
+    target.innerHTML = `
+      <div class="empty-state">
+        <strong>Project not found</strong>
+        <p>The selected project could not be found.</p>
+      </div>
+    `;
 
     return;
   }
@@ -676,7 +650,7 @@ function renderProjectDetail(
       <div>
 
         <div class="project-code">
-          ${project.code}
+          ${project.id}
         </div>
 
         <h2 class="page-title">
@@ -684,7 +658,7 @@ function renderProjectDetail(
         </h2>
 
         <p class="page-subtitle">
-          ${project.department} · ${project.location}
+          ${project.location}
         </p>
 
       </div>
@@ -710,7 +684,7 @@ function renderProjectDetail(
           </div>
 
           <div class="info-value">
-            ${project.plannedProgress}%
+            ${project.planned}%
           </div>
 
         </div>
@@ -723,7 +697,7 @@ function renderProjectDetail(
           </div>
 
           <div class="info-value">
-            ${project.actualProgress}%
+            ${project.actual}%
           </div>
 
         </div>
@@ -774,7 +748,6 @@ function renderProjectDetail(
               <th>Timeline</th>
               <th>Progress</th>
               <th>Status</th>
-              <th></th>
 
             </tr>
 
@@ -795,7 +768,7 @@ function renderProjectDetail(
                       </div>
 
                       <div class="table-muted">
-                        ${task.code}
+                        ${task.id}
                       </div>
 
                     </td>
@@ -807,7 +780,7 @@ function renderProjectDetail(
                     <td>
                       ${task.start}
                       →
-                      ${task.finish}
+                      ${task.end}
                     </td>
 
                     <td>
@@ -823,17 +796,6 @@ function renderProjectDetail(
                       >
                         ${task.status}
                       </span>
-
-                    </td>
-
-                    <td>
-
-                      <button
-                        class="gov-btn gov-btn-secondary gov-btn-sm"
-                        onclick="navigateTo('/schedule/${task.id}')"
-                      >
-                        Details
-                      </button>
 
                     </td>
 
