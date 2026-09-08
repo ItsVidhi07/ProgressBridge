@@ -1071,4 +1071,132 @@ function openScheduleActivity(activityId) {
 
         <!-- Notes -->
 
+         <section class="gov-card">
+
+          <div class="gov-card-header">
+
+            <div>
+
+              <h3>
+                Notes
+              </h3>
+
+            </div>
+
+          </div>
+
+          <p class="text-muted">
+            ${escapeHtml(
+              activity.notes ||
+                "No additional notes available."
+            )}
+          </p>
+
+        </section>
+
+
+      </div>
+
+    </div>
+  `;
+
+
+  modal.addEventListener(
+    "click",
+    event => {
+
+      if (event.target === modal) {
+        closeScheduleActivity();
+      }
+
+    }
+  );
+
+
+  document.body.appendChild(modal);
+}
+
+
+/* =========================================================
+   CLOSE MODAL
+   ========================================================= */
+
+function closeScheduleActivity() {
+
+  const modal =
+    document.getElementById(
+      "schedule-activity-modal"
+    );
+
+  if (modal) {
+    modal.remove();
+  }
+}
+
+
+/* =========================================================
+   DATE FORMATTER
+   ========================================================= */
+
+function formatScheduleDate(value) {
+
+  if (!value) {
+    return "—";
+  }
+
+
+  const date =
+    new Date(
+      `${value}T00:00:00`
+    );
+
+
+  if (
+    Number.isNaN(
+      date.getTime()
+    )
+  ) {
+    return escapeHtml(
+      value
+    );
+  }
+
+
+  return date.toLocaleDateString(
+    "en-IN",
+    {
+      day: "2-digit",
+      month: "short",
+      year: "numeric"
+    }
+  );
+}
+
+
+/* =========================================================
+   PROGRESS VALIDATION
+   ========================================================= */
+
+function clampScheduleProgress(value) {
+
+  const number =
+    Number(value);
+
+
+  if (
+    Number.isNaN(number)
+  ) {
+    return 0;
+  }
+
+
+  return Math.max(
+    0,
+    Math.min(
+      100,
+      number
+    )
+  );
+}
+
         
