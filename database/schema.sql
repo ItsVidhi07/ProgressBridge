@@ -154,8 +154,7 @@ VALUES
 ('Bengaluru Metro Corridor', 12.9716, 77.5946, 55, 50),
 ('Hyderabad Riverfront Development', 17.3850, 78.4867, 40, 35),
 ('Chennai Coastal Drainage Upgrade', 13.0827, 80.2707, 60, 57),
-('Pune Smart City Road Project', 18.5204, 73.8567, 50, 45);
-
+('Pune Smart City Road Project', 18.5204, 73.8567, 35, 30);
 -- Activities for the seeded projects
 INSERT INTO activities
 (project_id, activity_name, discipline, status)
