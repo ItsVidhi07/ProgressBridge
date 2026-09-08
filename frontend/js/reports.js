@@ -375,9 +375,7 @@ function renderMyReportsTable(projectId) {
                   <td>${new Date(report.submittedAt).toLocaleString()}</td>
 
                   <td>
-                    <span class="status-badge ${getStatusBadge(report.status)}">
-                      ${report.status}
-                    </span>
+                     ${getStatusBadge(report.status)}
                   </td>
 
                 </tr>
