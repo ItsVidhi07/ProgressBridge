@@ -12,7 +12,6 @@ class ProjectResponse(BaseModel):
     planned_progress: float
     actual_progress: float
 
-
 class ActivityResponse(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
@@ -30,7 +29,7 @@ class ProgressReportResponse(BaseModel):
     id: int
     created_at: datetime
     activity_id: int
-    progress: float
+   claimed_progress: float
     report_date: datetime
 
 
