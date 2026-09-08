@@ -32,5 +32,5 @@ class ProgressReport(Base):
     id = Column(Integer, primary_key=True)
     created_at = Column(DateTime)
     activity_id = Column(Integer, ForeignKey("activities.id"))
-    progress = Column(Float)
+    claimed_progress = Column(Float)
     report_date = Column(DateTime(timezone=True), nullable=True)
