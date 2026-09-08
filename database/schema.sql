@@ -141,6 +141,7 @@ ON verifications(report_id);
 CREATE INDEX IF NOT EXISTS idx_audit_report_id
 ON audit_ledger(report_id);
 -- ============================================
+-- ============================================
 -- SEED DATA
 -- 6 infrastructure projects + 36 activities
 -- ============================================
@@ -152,7 +153,8 @@ VALUES
 ('Delhi-NCR Expressway', 28.6139, 77.2090, 70, 66),
 ('Bengaluru Metro Corridor', 12.9716, 77.5946, 55, 50),
 ('Hyderabad Riverfront Development', 17.3850, 78.4867, 40, 35),
-('Chennai Coastal Drainage Upgrade', 13.0827, 80.2707, 60, 57);
+('Chennai Coastal Drainage Upgrade', 13.0827, 80.2707, 60, 57),
+('Pune Smart City Road Project', 18.5204, 73.8567, 50, 45);
 
 -- Activities for the seeded projects
 INSERT INTO activities
@@ -193,9 +195,9 @@ VALUES
 (6, 'Walkway Construction', 'Civil', 'Not Started'),
 (6, 'Water Pipeline Connection', 'Water Supply', 'Not Started'),
 
-(7, 'Drain Excavation', 'Civil', 'Completed'),
-(7, 'Drainage Pipeline Installation', 'Water Supply', 'In Progress'),
-(7, 'Pump Station Construction', 'Mechanical', 'In Progress'),
-(7, 'Electrical Pump Connections', 'Electrical', 'Not Started'),
-(7, 'Flood Control Structure', 'Civil', 'Not Started'),
-(7, 'Water Flow Testing', 'Water Supply', 'Not Started');
+(6, 'Drain Excavation', 'Civil', 'Completed'),
+(6, 'Drainage Pipeline Installation', 'Water Supply', 'In Progress'),
+(6, 'Pump Station Construction', 'Mechanical', 'In Progress'),
+(6, 'Electrical Pump Connections', 'Electrical', 'Not Started'),
+(6, 'Flood Control Structure', 'Civil', 'Not Started'),
+(6, 'Water Flow Testing', 'Water Supply', 'Not Started');
