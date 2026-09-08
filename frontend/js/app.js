@@ -51,14 +51,13 @@ const store = {
       actual: 68,
       status: "On Track",
       activities: 6,
-
       // Prototype/demo geofence.
-  // Replace with the actual construction-site coordinates later.
-  siteGeoCenter: {
-    lat: 19.0760,
-    lng: 72.8777,
-    radiusMeters: 5000
-  }
+      // Replace with the actual construction-site coordinates later.
+      siteGeoCenter: {
+        lat: 19.0760,
+        lng: 72.8777,
+        radiusMeters: 5000
+      }
     },
 
     {
@@ -69,15 +68,11 @@ const store = {
       actual: 81,
       status: "On Track",
       activities: 5,
-
-      // Prototype/demo geofence.
-  // Replace with the actual construction-site coordinates later.
-  siteGeoCenter: {
-    lat: 28.6139,
-    lng: 77.2090,
-    radiusMeters: 5000
-  }
-
+      siteGeoCenter: {
+        lat: 28.6139,
+        lng: 77.2090,
+        radiusMeters: 5000
+      }
     },
 
     {
@@ -88,16 +83,12 @@ const store = {
       actual: 49,
       status: "Delayed",
       activities: 4,
-
-      // Prototype/demo geofence.
-  // Replace with the actual construction-site coordinates later.
-  siteGeoCenter: {
-    lat: 12.9716,
-    lng: 77.5946,
-    radiusMeters: 5000
-  
+      siteGeoCenter: {
+        lat: 12.9716,
+        lng: 77.5946,
+        radiusMeters: 5000
+      }
     }
-  }
 
   ],
 
@@ -273,6 +264,12 @@ const store = {
     }
 
   ],
+
+
+  // Verification Desk reads from this. Empty for now — ask if you
+  // want a few demo field reports seeded here so Verification Desk
+  // has something to show during the demo.
+  reports: [],
 
 
   auditTrail: []
@@ -718,7 +715,7 @@ function isRouteAllowed(path) {
 
 
 /* =========================================================
-   ROUTER
+   ROUTER (navigation entry point)
    ========================================================= */
 
 function navigateTo(path) {
@@ -749,7 +746,7 @@ function navigateTo(path) {
 
 
 /* =========================================================
-   ROUTER
+   ROUTER (view dispatch)
    ========================================================= */
 
 function routeApplication(path) {
@@ -792,9 +789,20 @@ function routeApplication(path) {
 
     case "/projects":
 
-      renderModulePlaceholder(
-        "Projects"
-      );
+      if (
+        typeof renderProjectsList ===
+        "function"
+      ) {
+
+        renderProjectsList();
+
+      } else {
+
+        renderModulePlaceholder(
+          "Projects"
+        );
+
+      }
 
       break;
 
@@ -821,45 +829,47 @@ function routeApplication(path) {
 
     case "/reports":
 
-  if (
-    typeof renderReportSubmission ===
-    "function"
-  ) {
+      if (
+        typeof renderReportSubmission ===
+        "function"
+      ) {
 
-    renderReportSubmission(
-      viewport
-    );
+        renderReportSubmission(
+          viewport
+        );
 
-  } else {
+      } else {
 
-    renderModulePlaceholder(
-      "Field Reports"
-    );
+        renderModulePlaceholder(
+          "Field Reports"
+        );
 
-  }
+      }
 
-  break;
+      break;
+
 
     case "/verification":
 
-  if (
-    typeof renderVerification ===
-    "function"
-  ) {
+      if (
+        typeof renderVerification ===
+        "function"
+      ) {
 
-    renderVerification(
-      viewport
-    );
+        renderVerification(
+          viewport
+        );
 
-  } else {
+      } else {
 
-    renderModulePlaceholder(
-      "Verification Desk"
-    );
+        renderModulePlaceholder(
+          "Verification Desk"
+        );
 
-  }
+      }
 
-  break;
+      break;
+
 
     case "/audit":
 
