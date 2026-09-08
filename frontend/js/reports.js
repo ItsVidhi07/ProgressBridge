@@ -657,7 +657,7 @@ function computeMockAIMatch(narrative, activity, claimedProgress, claimedDiscipl
 
   const today = new Date();
   const start = new Date(activity.start);
-  const finish = new Date(activity.finish);
+  const finish = new Date(activity.end);
 
   if (
     !Number.isNaN(start.getTime()) &&
