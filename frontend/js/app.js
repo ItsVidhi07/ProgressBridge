@@ -51,6 +51,14 @@ const store = {
       actual: 68,
       status: "On Track",
       activities: 6
+
+      // Prototype/demo geofence.
+  // Replace with the actual construction-site coordinates later.
+  siteGeoCenter: {
+    lat: 19.0760,
+    lng: 72.8777,
+    radiusMeters: 5000
+  }
     },
 
     {
@@ -61,6 +69,15 @@ const store = {
       actual: 81,
       status: "On Track",
       activities: 5
+
+      // Prototype/demo geofence.
+  // Replace with the actual construction-site coordinates later.
+  siteGeoCenter: {
+    lat: 28.6139,
+    lng: 77.2090,
+    radiusMeters: 5000
+  }
+
     },
 
     {
@@ -71,6 +88,14 @@ const store = {
       actual: 49,
       status: "Delayed",
       activities: 4
+
+      // Prototype/demo geofence.
+  // Replace with the actual construction-site coordinates later.
+  siteGeoCenter: {
+    lat: 12.9716,
+    lng: 77.5946,
+    radiusMeters: 5000
+  
     }
 
   ],
