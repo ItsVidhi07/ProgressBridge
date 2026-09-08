@@ -20,10 +20,6 @@ SessionLocal = async_sessionmaker(
 )
 
 async def get_db():
-    async with SessionLocal() as session:
-        yield session
-
-async def get_db():
     print(">>> Opening DB session")
     async with SessionLocal() as session:
         yield session
