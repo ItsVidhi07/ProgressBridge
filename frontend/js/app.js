@@ -269,7 +269,123 @@ const store = {
   // Verification Desk reads from this. Empty for now — ask if you
   // want a few demo field reports seeded here so Verification Desk
   // has something to show during the demo.
-  reports: [],
+    reports: [
+
+    {
+      id: "RPT-1001",
+      projectId: "INF-MH-2026-014",
+      projectName: "Mumbai Water Supply Improvement",
+      projectCode: "INF-MH-2026-014",
+      activityCode: "A-003",
+      activityDescription: "Main pipeline installation",
+      claimedDiscipline: "Water Supply",
+      claimedProgress: 70,
+      narrative:
+        "Completed laying 340m of main pipeline along Sector 12. Jointing work done for 280m, remaining sections to be completed by next week.",
+      submittedBy: {
+        name: "Priya Sharma",
+        empId: "PB-FE-218"
+      },
+      submittedAt: "2026-09-05T10:15:00+05:30",
+      gps: {
+        latitude: 19.0761,
+        longitude: 72.8779,
+        accuracy: 8,
+        distanceMeters: 42,
+        withinGeofence: true
+      },
+      photo: {
+        fileName: "site_pipeline_0905.jpg",
+        deviceSignature: "2026-09-05 10:14 IST"
+      },
+      aiMatch: {
+        recommendedActivityCode: "A-003",
+        confidenceScore: 91,
+        heuristics: [
+          "Narrative keywords match activity discipline (Water Supply)",
+          "Claimed progress consistent with schedule window",
+          "GPS location within project geofence"
+        ]
+      },
+      status: "Pending Review"
+    },
+
+    {
+      id: "RPT-1002",
+      projectId: "INF-DL-2026-022",
+      projectName: "Delhi-NCR Expressway Improvement",
+      projectCode: "INF-DL-2026-022",
+      activityCode: "A-009",
+      activityDescription: "Road strengthening",
+      claimedDiscipline: "Road Works",
+      claimedProgress: 85,
+      narrative:
+        "Bituminous layer completed for 6km stretch near Sector 45 interchange. Compaction testing pending.",
+      submittedBy: {
+        name: "Priya Sharma",
+        empId: "PB-FE-218"
+      },
+      submittedAt: "2026-09-06T14:40:00+05:30",
+      gps: {
+        latitude: 28.6142,
+        longitude: 77.2085,
+        accuracy: 12,
+        distanceMeters: 610,
+        withinGeofence: false
+      },
+      photo: null,
+      aiMatch: {
+        recommendedActivityCode: "A-009",
+        confidenceScore: 74,
+        heuristics: [
+          "Narrative keywords match activity discipline (Road Works)",
+          "⚠ GPS location outside expected geofence radius",
+          "No photo attached to cross-verify"
+        ]
+      },
+      status: "Pending Review"
+    },
+
+    {
+      id: "RPT-1003",
+      projectId: "INF-KA-2026-055",
+      projectName: "Bengaluru Metro Airport Link",
+      projectCode: "INF-KA-2026-055",
+      activityCode: "A-013",
+      activityDescription: "Foundation works",
+      claimedDiscipline: "Structural",
+      claimedProgress: 72,
+      narrative:
+        "Pile foundation work completed for piers 14 to 20. Concrete curing in progress.",
+      submittedBy: {
+        name: "Priya Sharma",
+        empId: "PB-FE-218"
+      },
+      submittedAt: "2026-09-04T09:05:00+05:30",
+      gps: {
+        latitude: 12.9718,
+        longitude: 77.5949,
+        accuracy: 6,
+        distanceMeters: 30,
+        withinGeofence: true
+      },
+      photo: {
+        fileName: "pier_foundation_0904.jpg",
+        deviceSignature: "2026-09-04 09:03 IST"
+      },
+      aiMatch: {
+        recommendedActivityCode: "A-013",
+        confidenceScore: 88,
+        heuristics: [
+          "Narrative keywords match activity discipline (Structural)",
+          "Claimed progress consistent with schedule window",
+          "GPS location within project geofence"
+        ]
+      },
+      status: "Pending Review"
+    }
+
+  ],
 
 
   auditTrail: []
@@ -871,20 +987,46 @@ function routeApplication(path) {
       break;
 
 
-    case "/audit":
+       case "/audit":
 
-      renderModulePlaceholder(
-        "Audit Log"
-      );
+      if (
+        typeof renderAuditLog ===
+        "function"
+      ) {
+
+        renderAuditLog(
+          viewport
+        );
+
+      } else {
+
+        renderModulePlaceholder(
+          "Audit Log"
+        );
+
+      }
 
       break;
 
 
     case "/ai-engine":
 
-      renderModulePlaceholder(
-        "AI Matching Engine"
-      );
+      if (
+        typeof renderAIMatching ===
+        "function"
+      ) {
+
+        renderAIMatching(
+          viewport
+        );
+
+      } else {
+
+        renderModulePlaceholder(
+          "AI Matching Engine"
+        );
+
+      }
 
       break;
 
