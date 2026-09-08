@@ -3,13 +3,6 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from backend.models import Project, Activity, ProgressReport
 
-
-# Get all projects
-async def get_projects(db: AsyncSession):
-    result = await db.execute(select(Project))
-    return result.scalars().all()
-
-
 # Get one project
 async def get_project_by_id(db: AsyncSession, project_id: int):
     result = await db.execute(
