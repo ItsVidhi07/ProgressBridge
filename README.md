@@ -1,12 +1,17 @@
-ProgressBridge 🚧
+🚧 ProgressBridge
 
 Infrastructure Monitoring & Management Portal
 
-ProgressBridge is a web-based infrastructure monitoring and management portal developed as a student team project for Smart India Hackathon 2026.
+«ProgressBridge is a web-based infrastructure monitoring and management portal developed as a student team project for Smart India Hackathon 2026.»
 
-The project brings together infrastructure information such as projects, assets, maintenance activities, schedules, field updates, reports, and verification workflows into a single interface.
+""SIH 2026" (https://img.shields.io/badge/Smart%20India%20Hackathon-2026-blue?style=for-the-badge)" (https://www.sih.gov.in/)
+""Frontend" (https://img.shields.io/badge/Frontend-HTML%20%7C%20CSS%20%7C%20JavaScript-orange?style=for-the-badge)" (#-technology-stack)
+""Backend" (https://img.shields.io/badge/Backend-Python-green?style=for-the-badge)" (#-technology-stack)
+""AI" (https://img.shields.io/badge/AI-Sentence%20Transformers-purple?style=for-the-badge)" (#-ai-assisted-activity-matching)
 
-The current repository contains a working frontend prototype together with backend, database, AI, security, telemetry, testing, and deployment-related components that are being developed and integrated progressively.
+🌐 "Live Demo" (https://itsvidhi07.github.io/ProgressBridge/)
+
+💻 "GitHub Repository" (https://github.com/ItsVidhi07/ProgressBridge)
 
 ---
 
@@ -25,7 +30,7 @@ This can make it difficult to:
 - Identify activities that require attention
 - Maintain organized project records
 
-The question ProgressBridge addresses
+❓ The Question ProgressBridge Addresses
 
 «How can infrastructure project information and field-level progress be organized in one system so that reported work can be reviewed and monitored more effectively?»
 
@@ -49,7 +54,16 @@ Project / Activity Planning
           ↓
       Reports
 
-The repository also contains backend components for AI-assisted activity matching, security, telemetry, database operations, and related services.
+The repository also contains backend components for:
+
+- 🤖 AI-assisted activity matching
+- 🔐 Security
+- 📡 Telemetry
+- 🗄️ Database operations
+- 🧪 Testing
+- ⚙️ Application services
+
+These components are being integrated progressively as the project develops.
 
 ---
 
@@ -83,19 +97,51 @@ Provides a verification interface for reviewing submitted progress information a
 
 Provides structured views of project and progress information.
 
+---
+
 🤖 AI-Assisted Activity Matching
 
 The repository contains an AI matching module designed to compare field-report descriptions with relevant project activities using semantic similarity.
 
-The backend AI module uses Sentence Transformers and the "all-MiniLM-L6-v2" model, together with similarity and rule-based scoring.
+The backend AI module uses:
 
-This module is part of the backend implementation and is being integrated progressively with the overall application workflow.
+- Sentence Transformers
+- "all-MiniLM-L6-v2"
+- Semantic similarity
+- Cosine similarity
+- Rule-based scoring
+
+🔍 How It Works
+
+Field Report
+     ↓
+Text Representation
+     ↓
+Sentence Transformer
+     ↓
+Semantic Embedding
+     ↓
+Activity Similarity
+     ↓
+Rule-Based Scoring
+     ↓
+Candidate Activity
+     ↓
+Verification
+
+The AI module is designed to help identify the most relevant scheduled activity for a field report.
+
+«Note: The AI component is implemented in the backend and is being integrated progressively with the overall application workflow.»
+
+---
 
 📍 Telemetry
 
 The repository contains a backend telemetry module intended to support field/telemetry-related information.
 
 The current implementation should be considered a prototype component rather than a claim of live infrastructure-device integration.
+
+---
 
 🔐 Security
 
@@ -109,22 +155,30 @@ Production-scale security hardening and complete end-to-end authentication integ
 
 ProgressBridge is designed around the following workflow:
 
-Field Progress
-      │
-      ▼
-Activity Identification
-      │
-      ▼
-Verification Desk
-      │
-      ▼
-Approve / Reject
-      │
-      ▼
-Project Monitoring
-      │
-      ▼
-Reports
+┌───────────────────┐
+│   Field Progress  │
+└─────────┬─────────┘
+          ↓
+┌───────────────────┐
+│ Activity          │
+│ Identification    │
+└─────────┬─────────┘
+          ↓
+┌───────────────────┐
+│ Verification Desk │
+└─────────┬─────────┘
+          ↓
+┌───────────────────┐
+│  Approve / Reject │
+└─────────┬─────────┘
+          ↓
+┌───────────────────┐
+│ Project Monitoring│
+└─────────┬─────────┘
+          ↓
+┌───────────────────┐
+│      Reports      │
+└───────────────────┘
 
 The repository also contains AI, telemetry, security, and database components that can extend this workflow as integration progresses.
 
@@ -142,7 +196,7 @@ The repository also contains AI, telemetry, security, and database components th
                         │
           ┌─────────────┼─────────────┐
           ▼             ▼             ▼
-       DATABASE     AI MODULE     TELEMETRY
+       DATABASE      AI MODULE     TELEMETRY
           │             │             │
           └─────────────┼─────────────┘
                         ▼
@@ -151,55 +205,22 @@ The repository also contains AI, telemetry, security, and database components th
                         ▼
                  DASHBOARD / REPORTS
 
-The architecture is modular so that individual components can be developed and integrated independently.
+The architecture is modular, allowing individual components to be developed and integrated independently.
 
 ---
 
 🛠️ Technology Stack
 
-Frontend
-
-- HTML5
-- CSS3
-- JavaScript
-
-Backend
-
-- Python
-- FastAPI
-
-Database
-
-- PostgreSQL
-- PostGIS
-
-AI / NLP
-
-- Sentence Transformers
-- "all-MiniLM-L6-v2"
-- Semantic similarity
-- Cosine similarity
-
-Security & Application Services
-
-- Python-based security components
-- Authentication/authorization components
-
-Development
-
-- Visual Studio Code
-- Git
-- GitHub
-
-CI
-
-- GitHub Actions
-- Ruff-based Python code checks
-
-Deployment
-
-- GitHub Pages for the frontend prototype
-- Backend deployment configuration/documentation for cloud deployment
+Layer| Technologies
+Frontend| HTML5, CSS3, JavaScript
+Backend| Python, FastAPI
+Database| PostgreSQL, PostGIS
+AI / NLP| Sentence Transformers, "all-MiniLM-L6-v2"
+Similarity| Semantic similarity, cosine similarity
+Security| Python-based security components
+Development| Visual Studio Code, Git, GitHub
+CI| GitHub Actions, Ruff
+Deployment| GitHub Pages for frontend prototype
 
 ---
 
@@ -230,7 +251,6 @@ ProgressBridge/
 │   ├── security.py
 │   ├── seed_data.py
 │   ├── telemetry.py
-│   ├── requirements.txt
 │   ├── test_db.py
 │   └── test_security_telemetry.py
 │
@@ -243,7 +263,7 @@ ProgressBridge/
 ├── README.md
 └── .gitignore
 
-The repository structure may evolve as development continues.
+«Note: The repository structure may evolve as development continues.»
 
 ---
 
@@ -282,17 +302,21 @@ Live telemetry/device integration| 🔄 Not yet demonstrated
 Production backend deployment| 🔄 In development
 End-to-end production testing| 🔄 In development
 
-🔮 Possible Future Extensions
+---
 
-- Real-time infrastructure/device telemetry
-- Advanced geospatial visualization
-- Automated field-image validation
-- Advanced anomaly detection
-- Automated notifications
-- Mobile-focused field reporting
-- Advanced project analytics
-- Production-scale deployment
-- Additional security hardening
+🔮 Future Extensions
+
+Potential future improvements include:
+
+- 📡 Real-time infrastructure/device telemetry
+- 📍 Advanced geospatial visualization
+- 📷 Automated field-image validation
+- 🤖 Advanced anomaly detection
+- 🔔 Automated notifications
+- 📱 Mobile-focused field reporting
+- 📊 Advanced project analytics
+- ☁️ Production-scale deployment
+- 🔐 Additional security hardening
 
 ---
 
@@ -302,7 +326,13 @@ Current Stage: Working Prototype — Active Development
 
 The deployed frontend demonstrates the current user-facing ProgressBridge prototype.
 
-The GitHub repository additionally contains backend and supporting modules for database operations, AI-assisted activity matching, security, telemetry, and testing.
+The GitHub repository additionally contains backend and supporting modules for:
+
+- Database operations
+- AI-assisted activity matching
+- Security
+- Telemetry
+- Testing
 
 These components are being integrated progressively rather than being presented as a fully production-deployed system.
 
@@ -310,32 +340,37 @@ These components are being integrated progressively rather than being presented 
 
 🌐 Live Demo
 
-ProgressBridge:
-https://itsvidhi07.github.io/ProgressBridge/
+ProgressBridge
+
+👉 "Open the Live Demo" (https://itsvidhi07.github.io/ProgressBridge/)
+
+Source Code
+
+👉 "View the GitHub Repository" (https://github.com/ItsVidhi07/ProgressBridge)
 
 ---
 
 💻 Getting Started
 
-1. Clone the repository
+1. Clone the Repository
 
 git clone https://github.com/ItsVidhi07/ProgressBridge.git
 
-2. Open the project
-
 cd ProgressBridge
+
+2. Open the Project
 
 Open the project in Visual Studio Code.
 
-3. Run the frontend
+3. Run the Frontend
 
 The current frontend can be opened using the VS Code Live Server extension or another local development server.
 
-Main entry point:
+Main Entry Point
 
 frontend/index.html
 
-Backend setup depends on the current development environment and required database configuration.
+«Backend setup depends on the current development environment and required database configuration.»
 
 ---
 
@@ -343,7 +378,7 @@ Backend setup depends on the current development environment and required databa
 
 The project is developed collaboratively using Git and GitHub.
 
-Team members can work on separate feature branches and merge completed work into "main".
+A typical feature workflow is:
 
 main
  │
@@ -353,7 +388,7 @@ main
  ├── feature/database
  └── feature/ai
 
-Example:
+Example
 
 git checkout main
 git pull origin main
@@ -371,19 +406,20 @@ Changes can then be reviewed through a Pull Request before being merged into "ma
 
 📝 Commit Convention
 
-Simple prefixes are used to make project history easier to understand:
+Simple prefixes can be used to make the project history easier to understand:
 
-feat: add dashboard cards
-fix: resolve navigation issue
-style: improve responsive layout
-refactor: organize frontend structure
-docs: update project documentation
+Prefix| Example
+"feat:"| "feat: add dashboard cards"
+"fix:"| "fix: resolve navigation issue"
+"style:"| "style: improve responsive layout"
+"refactor:"| "refactor: organize frontend structure"
+"docs:"| "docs: update project documentation"
 
-Commit messages should describe what changed.
+Commit messages should clearly describe what changed.
 
 ---
 
-⚙️ CI
+⚙️ Continuous Integration
 
 GitHub Actions is configured under:
 
@@ -404,7 +440,7 @@ SUPABASE_URL
 SUPABASE_KEY
 JWT_SECRET
 
-«Never commit passwords, API keys, database credentials, or other secrets to the repository.»
+«⚠️ Never commit passwords, API keys, database credentials, or other secrets to the repository.»
 
 ---
 
@@ -412,49 +448,77 @@ JWT_SECRET
 
 Screenshots of the current prototype can be added here to make the repository easier to understand.
 
-Recommended screenshots:
+Recommended Screenshots
 
 1. Dashboard
 2. Schedule of Works
 3. Verification Desk
 
-Example:
+After adding a "screenshots/" folder to the repository:
+
+screenshots/
+├── dashboard.png
+├── schedule.png
+└── verification.png
+
+Use:
 
 ## 📸 Preview
 
 ### Dashboard
+
 ![ProgressBridge Dashboard](screenshots/dashboard.png)
 
 ### Schedule of Works
+
 ![Schedule of Works](screenshots/schedule.png)
 
 ### Verification Desk
+
 ![Verification Desk](screenshots/verification.png)
 
 ---
 
 👥 Team
 
-ProgressBridge is being developed collaboratively by a student team.
+ProgressBridge is being developed collaboratively by a student team for Smart India Hackathon 2026.
 
-Areas of contribution include:
+Areas of Contribution
 
-- Frontend development
-- Backend development
-- Database design
-- AI / NLP
-- Security
-- Telemetry
-- Testing
-- Deployment
+- 🎨 Frontend Development
+- ⚙️ Backend Development
+- 🗄️ Database Design
+- 🤖 AI / NLP
+- 🔐 Security
+- 📡 Telemetry
+- 🧪 Testing
+- 🚀 Deployment
 
 ---
 
 🏆 Project Goal
 
-ProgressBridge aims to demonstrate how frontend development, backend APIs, databases, AI-assisted matching, security, telemetry, and verification workflows can be combined to address an infrastructure-management problem.
+ProgressBridge aims to demonstrate how:
 
-The project focuses on a simple principle:
+Frontend
+   +
+Backend APIs
+   +
+Database
+   +
+AI / NLP
+   +
+Security
+   +
+Telemetry
+   +
+Verification
+   ↓
+Infrastructure Monitoring
+
+can be combined to address an infrastructure-management problem.
+
+The project focuses on one simple principle:
 
 «Connect what is planned, what is reported, and what is reviewed.»
 
@@ -462,12 +526,16 @@ The project focuses on a simple principle:
 
 📄 License
 
-This project is currently being developed for academic and educational purposes.
+This project is currently being developed for academic and educational purposes as part of Smart India Hackathon 2026.
 
 A formal open-source license may be added if the project is released for public use.
 
 ---
 
-🚧 Smart India Hackathon 2026
+<div align="center">🚧 ProgressBridge
 
-ProgressBridge — From Planned Progress to Verified Progress.
+From Planned Progress to Verified Progress.
+
+Smart India Hackathon 2026
+
+</div>
